@@ -30,24 +30,24 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="Tags" />
+<meta property="og:title" content="My Simple Blog" />
 <meta property="og:locale" content="en" />
 <meta name="description" content="A minimal, responsive and feature-rich Jekyll theme for technical writing." />
 <meta property="og:description" content="A minimal, responsive and feature-rich Jekyll theme for technical writing." />
-<link rel="canonical" href="http://localhost:4000/tags/" />
-<meta property="og:url" content="http://localhost:4000/tags/" />
+<link rel="canonical" href="http://localhost:4000/page4/" />
+<meta property="og:url" content="http://localhost:4000/page4/" />
 <meta property="og:site_name" content="My Simple Blog" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-10-05T14:04:17+08:00" />
+<meta property="og:type" content="website" />
+<link rel="prev" href="http://localhost:4000/page3" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Tags" />
+<meta property="twitter:title" content="My Simple Blog" />
 <meta name="twitter:site" content="@twitter_username" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-10-05T14:04:17+08:00","datePublished":"2025-10-05T14:04:17+08:00","description":"A minimal, responsive and feature-rich Jekyll theme for technical writing.","headline":"Tags","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/tags/"},"url":"http://localhost:4000/tags/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"A minimal, responsive and feature-rich Jekyll theme for technical writing.","headline":"My Simple Blog","url":"http://localhost:4000/page4/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>Tags | My Simple Blog
+  <title>My Simple Blog
   </title>
 
   <!--
@@ -113,6 +113,8 @@
   
 
   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css">
+  
 
   
 
@@ -129,6 +131,10 @@
 <!-- layout specified -->
 
 
+  
+
+  
+
 
 
 
@@ -150,9 +156,44 @@
 
   
 
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
 
 
-  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/dayjs@1.11.13/dayjs.min.js,npm/dayjs@1.11.13/locale/en.js,npm/dayjs@1.11.13/plugin/relativeTime.js,npm/dayjs@1.11.13/plugin/localizedFormat.js"></script>
 
 
 
@@ -160,7 +201,7 @@
 
 
 
-<script defer src="/assets/js/dist/commons.min.js"></script>
+<script defer src="/assets/js/dist/home.min.js"></script>
 
 
 
@@ -190,7 +231,7 @@
   <nav class="flex-column flex-grow-1 w-100 ps-0">
     <ul class="nav">
       <!-- home -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a href="/" class="nav-link">
           <i class="fa-fw fas fa-home"></i>
           <span>HOME</span>
@@ -208,7 +249,7 @@
         </li>
         <!-- .nav-item -->
       
-        <li class="nav-item active">
+        <li class="nav-item">
           <a href="/tags/" class="nav-link">
             <i class="fa-fw fas fa-tags"></i>
             
@@ -338,21 +379,9 @@
       
 
       
-        
-          
-            <span>
-              <a href="/">Home</a>
-            </span>
+        <!-- index page -->
+        <span>Home</span>
 
-          
-        
-          
-            
-              <span>Tags</span>
-            
-
-          
-        
       
     </nav>
     <!-- endof #breadcrumb -->
@@ -362,7 +391,7 @@
     </button>
 
     <div id="topbar-title">
-      Tags
+      My Simple Blog
     </div>
 
     <button type="button" id="search-trigger" class="btn btn-link">
@@ -388,84 +417,320 @@
         <div class="row flex-grow-1">
           <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
             
+              <!-- Refactor the HTML structure -->
+
+
+
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+
+<!-- Change the icon of checkbox -->
+
+
+
+<!-- Handle images -->
+
+
+
+
+
+<!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- return -->
+
+
+
+
+
+
+
+
+
+<!-- Get pinned posts on current page -->
+
+
+
+
+
+
+<!-- Get normal posts on current page -->
+
+
+
+
+
+<div id="post-list" class="flex-grow-1 px-xl-1">
+  
+    <article class="card-wrapper card">
+      <a href="/posts/customize-the-favicon/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">更新图标方法</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>The favicons of Chirpy are placed in the directory assets/img/favicons/. You may want to replace them with your own. The following sections will guide you to create and replace the default favicons...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1565454840"
+  data-df="ll"
+  
+>
+  Aug 11, 2019
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      Blogging,
+                      Tutorial
+                  </span>
+                
+              </div>
+
               
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a href="/posts/write-a-new-post/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">教程——如何写一篇新文章</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>This tutorial will guide you how to write a post in the Chirpy template, and it’s worth reading even if you’ve used Jekyll before, as many features require specific variables to be set.  Naming and...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
 
 
 
-<article class="px-1">
-  
-    
-    
-    <h1 class="dynamic-title">
-      Tags
-    </h1>
-    <div class="content">
-      <div id="tags" class="d-flex flex-wrap mx-xl-2">
-  
-  
 
+<time
   
+  data-ts="1565244600"
+  data-df="ll"
+  
+>
+  Aug  8, 2019
+</time>
 
-  
-    <div>
-      <a class="tag" href="/tags/code/">
-        code<span class="text-muted">1</span>
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      Blogging,
+                      Tutorial
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
       </a>
-    </div>
-  
-    <div>
-      <a class="tag" href="/tags/dmd/">
-        DMD<span class="text-muted">1</span>
-      </a>
-    </div>
-  
-    <div>
-      <a class="tag" href="/tags/favicon/">
-        favicon<span class="text-muted">1</span>
-      </a>
-    </div>
-  
-    <div>
-      <a class="tag" href="/tags/model/">
-        model<span class="text-muted">1</span>
-      </a>
-    </div>
-  
-    <div>
-      <a class="tag" href="/tags/preparation/">
-        preparation<span class="text-muted">1</span>
-      </a>
-    </div>
-  
-    <div>
-      <a class="tag" href="/tags/writing/">
-        writing<span class="text-muted">1</span>
-      </a>
-    </div>
-  
-    <div>
-      <a class="tag" href="/tags/%E6%9C%89%E9%99%90%E4%BD%93%E7%A7%AF-fvm/">
-        有限体积(FVM)<span class="text-muted">2</span>
-      </a>
-    </div>
-  
-    <div>
-      <a class="tag" href="/tags/%E6%9C%89%E9%99%90%E5%B7%AE%E5%88%86-fdm/">
-        有限差分(FDM)<span class="text-muted">5</span>
-      </a>
-    </div>
-  
-    <div>
-      <a class="tag" href="/tags/%E6%A0%87%E8%AE%B0%E7%AC%A6/">
-        标记符<span class="text-muted">1</span>
-      </a>
-    </div>
+    </article>
   
 </div>
+<!-- #post-list -->
 
-    </div>
-  
-</article>
+
+  <!-- The paginator for post list on HomgPage. -->
+
+<nav aria-label="Page Navigation">
+  <ul class="pagination align-items-center mt-4 mb-0">
+    <!-- left arrow -->
+    
+
+    <li class="page-item ">
+      <a class="page-link" href="/page3" aria-label="previous-page">
+        <i class="fas fa-angle-left"></i>
+      </a>
+    </li>
+
+    <!-- page numbers -->
+    
+    
+
+    
+      
+      
+      
+      
+      
+
+      
+
+      
+        <!-- show number -->
+        <li class="page-item ">
+          <a
+            class="page-link"
+            href="/"
+          >1</a>
+        </li>
+      
+    
+      
+      
+      
+      
+      
+
+      
+
+      
+        <!-- show number -->
+        <li class="page-item ">
+          <a
+            class="page-link"
+            href="/page2"
+          >2</a>
+        </li>
+      
+    
+      
+      
+      
+      
+      
+
+      
+
+      
+        <!-- show number -->
+        <li class="page-item ">
+          <a
+            class="page-link"
+            href="/page3"
+          >3</a>
+        </li>
+      
+    
+      
+      
+      
+      
+      
+
+      
+
+      
+        <!-- show number -->
+        <li class="page-item  active">
+          <a
+            class="page-link"
+            href="/page4"
+          >4</a>
+        </li>
+      
+    
+
+    <!-- mobile pagination -->
+    <li class="page-index align-middle">
+      <span>4</span>
+      <span class="text-muted">/ 4</span>
+    </li>
+
+    <!-- right arrow -->
+    
+
+    <li class="page-item disabled">
+      <a class="page-link" href="#" aria-label="next-page">
+        <i class="fas fa-angle-right"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+<!-- .pagination -->
+
+
+
 
             
           </main>
