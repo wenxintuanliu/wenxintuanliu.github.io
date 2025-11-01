@@ -1,5 +1,13 @@
 [
   {
+    "title": "三维顶盖驱动方腔流结果展示",
+    "url": "/posts/%E4%B8%89%E7%BB%B4%E9%A1%B6%E7%9B%96%E9%A9%B1%E5%8A%A8%E6%96%B9%E8%85%94%E6%B5%81/",
+    "categories": "lid-driven-cavity",
+    "tags": "nek5000",
+    "date": "2025-11-01 14:19:01 +0800",
+    "content": "这是三维顶盖驱动方腔流谱元法的结果，包括Re=100、400、1000、3200"
+  },
+  {
     "title": ".f*(nek5000)文件————Tensor",
     "url": "/posts/nek%E8%BD%ACmatlab-Tensor/",
     "categories": "nek5000",

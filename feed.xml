@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>My Simple Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-10-05T14:04:17+08:00</updated>
+  <updated>2025-11-01T14:48:03+08:00</updated>
   <author>
     <name>Chunfeng fusu</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,30 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>三维顶盖驱动方腔流结果展示</title>
+    <link href="http://localhost:4000/posts/%E4%B8%89%E7%BB%B4%E9%A1%B6%E7%9B%96%E9%A9%B1%E5%8A%A8%E6%96%B9%E8%85%94%E6%B5%81/" rel="alternate" type="text/html" title="三维顶盖驱动方腔流结果展示" />
+    <published>2025-11-01T14:19:01+08:00</published>
+  
+    <updated>2025-11-01T14:19:01+08:00</updated>
+  
+    <id>http://localhost:4000/posts/%E4%B8%89%E7%BB%B4%E9%A1%B6%E7%9B%96%E9%A9%B1%E5%8A%A8%E6%96%B9%E8%85%94%E6%B5%81/</id>
+    <content type="text/html" src="http://localhost:4000/posts/%E4%B8%89%E7%BB%B4%E9%A1%B6%E7%9B%96%E9%A9%B1%E5%8A%A8%E6%96%B9%E8%85%94%E6%B5%81/" />
+    <author>
+      <name>Chunfeng Fusu</name>
+    </author>
+
+  
+    
+    <category term="lid-driven-cavity" />
+    
+  
+
+  <summary>这是三维顶盖驱动方腔流谱元法的结果，包括Re=100、400、1000、3200</summary>
+
+  </entry>
 
   
   <entry>
@@ -111,30 +135,6 @@
   
 
   <summary>这是关于动态模式分解（DMD）的方法.</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>样式的熟悉与应用</title>
-    <link href="http://localhost:4000/posts/sass%E6%A0%B7%E5%BC%8F%E7%86%9F%E6%82%89%E4%B8%8E%E5%BC%95%E7%94%A8/" rel="alternate" type="text/html" title="样式的熟悉与应用" />
-    <published>2025-06-14T19:24:32+08:00</published>
-  
-    <updated>2025-06-14T19:24:32+08:00</updated>
-  
-    <id>http://localhost:4000/posts/sass%E6%A0%B7%E5%BC%8F%E7%86%9F%E6%82%89%E4%B8%8E%E5%BC%95%E7%94%A8/</id>
-    <content type="text/html" src="http://localhost:4000/posts/sass%E6%A0%B7%E5%BC%8F%E7%86%9F%E6%82%89%E4%B8%8E%E5%BC%95%E7%94%A8/" />
-    <author>
-      <name>Chunfeng Fusu</name>
-    </author>
-
-  
-    
-    <category term="小玩意" />
-    
-  
-
-  <summary>这是sass样式定义的例子</summary>
 
   </entry>
 
