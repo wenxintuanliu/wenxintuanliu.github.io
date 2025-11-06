@@ -1,5 +1,13 @@
 [
   {
+    "title": "HODMD(高阶动态模式分解)",
+    "url": "/posts/HODMD%E7%A4%BA%E4%BE%8B/",
+    "categories": "DMD",
+    "tags": "",
+    "date": "2025-11-06 21:34:01 +0800",
+    "content": "标准动态模式分解的改进版本，主要利用高阶Koopman算子假设。"
+  },
+  {
     "title": "三维顶盖驱动方腔流结果展示",
     "url": "/posts/%E4%B8%89%E7%BB%B4%E9%A1%B6%E7%9B%96%E9%A9%B1%E5%8A%A8%E6%96%B9%E8%85%94%E6%B5%81/",
     "categories": "lid-driven-cavity",

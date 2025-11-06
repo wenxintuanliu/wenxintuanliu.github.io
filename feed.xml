@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>My Simple Blog</title>
   <subtitle>A minimal, responsive and feature-rich Jekyll theme for technical writing.</subtitle>
-  <updated>2025-11-01T15:03:34+08:00</updated>
+  <updated>2025-11-06T23:08:57+08:00</updated>
   <author>
     <name>Chunfeng fusu</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,30 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>HODMD(高阶动态模式分解)</title>
+    <link href="http://localhost:4000/posts/HODMD%E7%A4%BA%E4%BE%8B/" rel="alternate" type="text/html" title="HODMD(高阶动态模式分解)" />
+    <published>2025-11-06T21:34:01+08:00</published>
+  
+    <updated>2025-11-06T21:34:01+08:00</updated>
+  
+    <id>http://localhost:4000/posts/HODMD%E7%A4%BA%E4%BE%8B/</id>
+    <content type="text/html" src="http://localhost:4000/posts/HODMD%E7%A4%BA%E4%BE%8B/" />
+    <author>
+      <name>Chunfeng Fusu</name>
+    </author>
+
+  
+    
+    <category term="DMD" />
+    
+  
+
+  <summary>标准动态模式分解的改进版本，主要利用高阶Koopman算子假设。</summary>
+
+  </entry>
 
   
   <entry>
@@ -111,30 +135,6 @@
   
 
   <summary>这是顶盖驱动方腔流的有限体积方法的结果，包括Re=100、1000、1500</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>动态模式分解简介</title>
-    <link href="http://localhost:4000/posts/DMD1/" rel="alternate" type="text/html" title="动态模式分解简介" />
-    <published>2025-07-16T11:33:32+08:00</published>
-  
-    <updated>2025-07-16T11:33:32+08:00</updated>
-  
-    <id>http://localhost:4000/posts/DMD1/</id>
-    <content type="text/html" src="http://localhost:4000/posts/DMD1/" />
-    <author>
-      <name>Chunfeng Fusu</name>
-    </author>
-
-  
-    
-    <category term="数据驱动" />
-    
-  
-
-  <summary>这是关于动态模式分解（DMD）的方法.</summary>
 
   </entry>
 

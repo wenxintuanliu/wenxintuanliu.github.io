@@ -30,26 +30,26 @@
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content=".f*(nek5000)文件————Tensor" />
+<meta property="og:title" content="HODMD(高阶动态模式分解)" />
 <meta name="author" content="Chunfeng Fusu" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="读取nek5000的.f*文件，提取数据为Tensor(MATLAB)." />
-<meta property="og:description" content="读取nek5000的.f*文件，提取数据为Tensor(MATLAB)." />
-<link rel="canonical" href="http://localhost:4000/posts/nek%E8%BD%ACmatlab-Tensor/" />
-<meta property="og:url" content="http://localhost:4000/posts/nek%E8%BD%ACmatlab-Tensor/" />
+<meta name="description" content="标准动态模式分解的改进版本，主要利用高阶Koopman算子假设。" />
+<meta property="og:description" content="标准动态模式分解的改进版本，主要利用高阶Koopman算子假设。" />
+<link rel="canonical" href="http://localhost:4000/posts/HODMD%E7%A4%BA%E4%BE%8B/" />
+<meta property="og:url" content="http://localhost:4000/posts/HODMD%E7%A4%BA%E4%BE%8B/" />
 <meta property="og:site_name" content="My Simple Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-10-05T12:53:12+08:00" />
+<meta property="article:published_time" content="2025-11-06T21:34:01+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content=".f*(nek5000)文件————Tensor" />
+<meta property="twitter:title" content="HODMD(高阶动态模式分解)" />
 <meta name="twitter:site" content="@twitter_username" />
 <meta name="twitter:creator" content="@Chunfeng Fusu" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Chunfeng Fusu","url":"https://github.com/wenxintuanliu/"},"dateModified":"2025-10-05T12:53:12+08:00","datePublished":"2025-10-05T12:53:12+08:00","description":"读取nek5000的.f*文件，提取数据为Tensor(MATLAB).","headline":".f*(nek5000)文件————Tensor","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/nek%E8%BD%ACmatlab-Tensor/"},"url":"http://localhost:4000/posts/nek%E8%BD%ACmatlab-Tensor/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Chunfeng Fusu","url":"https://github.com/wenxintuanliu/"},"dateModified":"2025-11-06T21:34:01+08:00","datePublished":"2025-11-06T21:34:01+08:00","description":"标准动态模式分解的改进版本，主要利用高阶Koopman算子假设。","headline":"HODMD(高阶动态模式分解)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/HODMD%E7%A4%BA%E4%BE%8B/"},"url":"http://localhost:4000/posts/HODMD%E7%A4%BA%E4%BE%8B/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <title>.f*(nek5000)文件————Tensor | My Simple Blog
+  <title>HODMD(高阶动态模式分解) | My Simple Blog
   </title>
 
   <!--
@@ -431,7 +431,7 @@
         
           
             
-              <span>.f*(nek5000)文件————Tensor</span>
+              <span>HODMD(高阶动态模式分解)</span>
             
 
           
@@ -499,6 +499,536 @@
 
 
 
+  
+  
+
+  
+    
+      
+      
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+      
+
+      
+    
+
+    <!-- take out classes -->
+    
+
+    
+    
+
+    
+
+    
+      
+    
+
+    <!-- lazy-load images -->
+    
+
+    
+      <!-- make sure the `<img>` is wrapped by `<a>` -->
+      
+
+      
+        <!-- create the image wrapper -->
+        
+
+        
+        
+      
+    
+
+    <!-- combine -->
+    
+  
+
+  
+
 
 <!-- Add header for code snippets -->
 
@@ -532,6 +1062,28 @@
 
       
     
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
 
     
   
@@ -539,6 +1091,71 @@
   
   
 
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
   
 
   
@@ -567,9 +1184,9 @@
 
 <article class="px-1" data-toc="true">
   <header>
-    <h1 data-toc-skip>.f*(nek5000)文件————Tensor</h1>
+    <h1 data-toc-skip>HODMD(高阶动态模式分解)</h1>
     
-      <p class="post-desc fw-light mb-4">读取nek5000的.f*文件，提取数据为Tensor(MATLAB).</p>
+      <p class="post-desc fw-light mb-4">标准动态模式分解的改进版本，主要利用高阶Koopman算子假设。</p>
     
 
     <div class="post-meta text-muted">
@@ -586,13 +1203,13 @@
 
 <time
   
-  data-ts="1759639992"
+  data-ts="1762436041"
   data-df="ll"
   
     data-bs-toggle="tooltip" data-bs-placement="bottom"
   
 >
-  Oct  5, 2025
+  Nov  6, 2025
 </time>
 
       </span>
@@ -644,9 +1261,9 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="26 words"
+  title="912 words"
 >
-  <em>1 min</em> read</span>
+  <em>5 min</em> read</span>
 
         </div>
       </div>
@@ -655,7 +1272,7 @@
 
   
     <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
-      <span class="label text-truncate">.f*(nek5000)文件————Tensor</span>
+      <span class="label text-truncate">HODMD(高阶动态模式分解)</span>
       <button type="button" class="toc-trigger btn me-1">
         <i class="fa-solid fa-list-ul fa-fw"></i>
       </button>
@@ -668,7 +1285,7 @@
 
     <dialog id="toc-popup" class="p-0">
       <div class="header d-flex flex-row align-items-center justify-content-between">
-        <div class="label text-truncate py-2 ms-4">.f*(nek5000)文件————Tensor</div>
+        <div class="label text-truncate py-2 ms-4">HODMD(高阶动态模式分解)</div>
         <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
           <i class="fas fa-close"></i>
         </button>
@@ -678,14 +1295,216 @@
   
 
   <div class="content">
-    <h2 id="下面是生成三维tensor5d和二维截面中性面为例tensor4d的代码"><span class="me-2">下面是生成三维Tensor5D和二维截面（中性面为例）Tensor4D的代码：</span><a href="#下面是生成三维tensor5d和二维截面中性面为例tensor4d的代码" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-<div class="language-matlab highlighter-rouge"><div class="code-header">
-        <span data-label-text="Matlab"><i class="fas fa-code fa-fw small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre>
+    <h3 id="简介"><span class="me-2">简介</span><a href="#简介" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
-</pre></td></tr></tbody></table></code></div></div>
+<h3 id="示例"><span class="me-2">示例</span><a href="#示例" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>废话不多说，拿个<strong>toy</strong>来看看HODMD行不行。<br />
+这里我构建了一个多模态流体动力学仿真数据集，模拟了二维流场中多个物理模态的叠加演化过程，我将HODMD应用在此叠加的流场数据上，查看分解得到的模态与重构流场。</p>
+
+<p>🦚 数据集基本信息</p>
+
+<p>变量数量: 2个（U: 水平速度分量，V: 垂直速度分量）</p>
+
+<p>空间网格: 60×60 均匀网格，范围 \([-1,1] \times [-1,1]\)</p>
+
+<p>时间维度: 100个时间步，时间步长 \(\Delta t = 0.1\)</p>
+
+<p>数据格式: 4维张量 $\text{Tensor}(2, 60, 60, 100)$</p>
+
+<p>🌊 物理模态构成</p>
+
+<p>数据集包含4个具有不同动力学特性的模态：</p>
+
+<p>模态1: 稳态剪切流 <br />
+频率: \(f_1 = 0 \text{ Hz}\)（稳态）<br />
+增长率: \(\sigma_1 = 0\)（中性稳定）<br />
+振幅: \(A_1 = 1.0\) <br />
+空间结构: 
+\(U_1(x,y) = \tanh\left(\frac{y}{0.5}\right)\)<br />
+\(V_1(x,y) = 0.1\sin\left(\frac{2\pi x}{4}\right)\)</p>
+
+<p>模态2: 低频涡旋 <br />
+频率: \(f_2 = 0.2 \text{ Hz}\)<br />
+增长率: \(\sigma_2 = -0.02\)（轻微衰减）<br />
+振幅: \(A_2 = 0.3\) 
+空间结构: 
+\(U_2(x,y) = -y \cdot \exp\left(-\frac{x^2 + y^2}{0.5}\right)\) <br />
+\(V_2(x,y) = x \cdot \exp\left(-\frac{x^2 + y^2}{0.5}\right)\)</p>
+
+<p>模态3: 中频行波 <br />
+频率: \(f_3 = 0.5 \text{ Hz}\)<br />
+增长率: \(\sigma_3 = 0.01\)（轻微增长） 
+振幅: \(A_3 = 0.2\) <br />
+空间结构: 
+\(U_3(x,y) = \sin\left(\frac{2\pi x}{3}\right) \cdot \cos\left(\frac{\pi y}{2}\right)\) <br />
+\(V_3(x,y) = \cos\left(\frac{2\pi x}{3}\right) \cdot \sin\left(\frac{\pi y}{2}\right)\)</p>
+
+<p>模态4: 高频振荡 <br />
+频率: \(f_4 = 1.2 \text{ Hz}\)  <br />
+增长率: \(\sigma_4 = -0.05\)（较强衰减）<br />
+振幅: \(A_4 = 0.15\)<br />
+空间结构: 
+\(U_4(x,y) = \sin(8\pi x) \cdot \cos(6\pi y)\)<br />
+\(V_4(x,y) = \cos(8\pi x) \cdot \sin(6\pi y)\)</p>
+
+<p>⚙️ 数学表达 
+每个模态的时间演化遵循：<br />
+\(A_m(t) = a_m \cdot e^{(\sigma_m + i2\pi f_m)t}\)</p>
+
+<p>总流场为各模态的线性叠加：<br />
+\(U(x,y,t) = \sum_{m=1}^{4} \text{Re}[A_m(t)] \cdot \Phi_m(x,y)\)</p>
+
+<p>其中 \(\Phi_m(x,y) = [U_m(x,y), V_m(x,y)]^T\) 是第m个模态的空间结构。</p>
+
+<blockquote class="prompt-tip">
+  <p>👻实际模态离散特征值：  \(\lambda=e^{(\sigma_m + i2\pi f_m)t}\)</p>
+</blockquote>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>模态</th>
+      <th>增长率 σ</th>
+      <th>频率</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>模态1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>模态2</td>
+      <td>0.990</td>
+      <td>0.125</td>
+    </tr>
+    <tr>
+      <td>模态3</td>
+      <td>0.952</td>
+      <td>0.309</td>
+    </tr>
+    <tr>
+      <td>模态4</td>
+      <td>0.725</td>
+      <td>0.681</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<blockquote class="prompt-info">
+  <p>由于上面一个模态有两个空间结构，我这里把它们组成一个矢量，其中值表示模态涡量，并叠加流线矢量图。</p>
+</blockquote>
+
+<div class="table-wrapper"><table>
+  <tr>
+    <td><a href="/../picture/HODMD/第1个实际模态.png" class="popup img-link  shimmer"><img src="/../picture/HODMD/第1个实际模态.png" alt="图片1" loading="lazy"></a></td>
+    <td><a href="/../picture/HODMD/第2个实际模态.png" class="popup img-link  shimmer"><img src="/../picture/HODMD/第2个实际模态.png" alt="图片2" loading="lazy"></a></td>
+  </tr>
+  <tr>
+    <td><a href="/../picture/HODMD/第3个实际模态.png" class="popup img-link  shimmer"><img src="/../picture/HODMD/第3个实际模态.png" alt="图片3" loading="lazy"></a></td>
+    <td><a href="/../picture/HODMD/第4个实际模态.png" class="popup img-link  shimmer"><img src="/../picture/HODMD/第4个实际模态.png" alt="图片4" loading="lazy"></a></td>
+  </tr>
+</table></div>
+
+<p>下面是执行HODMD得到的模态结果：</p>
+
+<blockquote class="prompt-tip">
+  <p>HODMD模态离散特征值： \(\lambda=e^{(\sigma_m + i2\pi f_m)t}\)</p>
+</blockquote>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>模态</th>
+      <th>增长率 σ</th>
+      <th>频率</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>模态1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>模态3</td>
+      <td>0.952</td>
+      <td>0.309</td>
+    </tr>
+    <tr>
+      <td>模态4</td>
+      <td>0.725</td>
+      <td>0.681</td>
+    </tr>
+    <tr>
+      <td>模态2</td>
+      <td>0.990</td>
+      <td>0.125</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<blockquote>
+  <p>左图：离散特征值图；右图：连续特征值图。</p>
+</blockquote>
+<div class="table-wrapper"><table style="table-layout: fixed; width: 600px;">
+  <col style="width: 50%;" />
+  <col style="width: 45%;" />
+  <tr>
+    <td style="padding: 5px;"><a href="/../picture/HODMD/eigenvalues_plot.png" class="popup img-link  shimmer"><img src="/../picture/HODMD/eigenvalues_plot.png" alt="图片1" style="width: 100%; height: auto;" loading="lazy"></a></td>
+    <td style="padding: 5px;"><a href="/../picture/HODMD/频率-振幅图.png" class="popup img-link  shimmer"><img src="/../picture/HODMD/频率-振幅图.png" alt="图片2" style="width: 100%; height: auto;" loading="lazy"></a></td>
+  </tr>
+</table></div>
+
+<p>可见提取出了与实际完全一样的增长率与频率的模态，只是模态不对应，当然这个不对应不是错误，而是实际模态的排序按照振幅进行，而这里HODMD模态的排序略有不同。 
+下面我们看看重构效果：</p>
+
+<div class="table-wrapper"><table>
+  <tr>
+    <td><a href="/../picture/HODMD/第20时刻_实际流场.png" class="popup img-link  shimmer"><img src="/../picture/HODMD/第20时刻_实际流场.png" alt="图片1" loading="lazy"></a></td>
+    <td><a href="/../picture/HODMD/第20时刻_重构流场.png" class="popup img-link  shimmer"><img src="/../picture/HODMD/第20时刻_重构流场.png" alt="图片2" loading="lazy"></a></td>
+  </tr>
+</table></div>
+
+<h1 id="流场重构误差评估">流场重构误差评估</h1>
+<h2 id="变量定义"><span class="me-2">变量定义</span><a href="#变量定义" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<ul>
+  <li>重构流场：\(\mathbf{U}_r = [u_r, v_r]^T\)</li>
+  <li>原始流场：\(\mathbf{U}_t = [u_t, v_t]^T\)</li>
+</ul>
+
+<h2 id="误差计算过程"><span class="me-2">误差计算过程</span><a href="#误差计算过程" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h3 id="1-分量误差"><span class="me-2">1. 分量误差</span><a href="#1-分量误差" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p>\(e_u = u_r - u_t\)
+\(e_v = v_r - v_t\)</p>
+
+<h3 id="2-误差模场"><span class="me-2">2. 误差模场</span><a href="#2-误差模场" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p>\(\varepsilon = \sqrt{e_u^2 + e_v^2}\)</p>
+
+<h3 id="3-误差指标计算"><span class="me-2">3. 误差指标计算</span><a href="#3-误差指标计算" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p><strong>均方根误差</strong>:
+\(\varepsilon_{\text{rms}} = \sqrt{\text{mean}(\varepsilon^2)}\)<br />
+<strong>最大误差</strong>:
+\(\varepsilon_{\text{max}} = \max(\varepsilon)\)<br />
+<strong>实际速度模场</strong>:
+\(V_t = \sqrt{u_t^2 + v_t^2}\)<br />
+<strong>平均实际速度</strong>:
+\(\bar{V}_t = \text{mean}(V_t)\)<br />
+<strong>相对误差</strong>:
+\(\varepsilon_{\text{rel}} = \frac{\varepsilon_{\text{rms}}}{\bar{V}_t}\)</p>
+<h2 id="输出结果"><span class="me-2">输出结果</span><a href="#输出结果" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<blockquote class="prompt-question">
+  <p>均方根误差\(\varepsilon_{\text{rms}}\) = 2.8709e-14 <br />
+最大误差\(\varepsilon_{\text{max}}\) = 4.4080e-14 <br />
+相对误差\(\varepsilon_{\text{rel}}\) = 4.0633e-14</p>
+</blockquote>
+
+<p>可见重构误差几乎很小，证明了HODMD的分解与重构的实力。</p>
+
+<p>更多细节请查看 ：
+<a href="https://www.sciencedirect.com/book/9780128197431/higher-order-dynamic-mode-decomposition-and-its-applications" title="书籍">J.M. Vega &amp; S. Le Clainche, “ Higher Order Dynamic Mode Decomposition and Its Applications”, Academic Press, Elsevier, 2020, ISBN 9780128197431.</a></p>
 
   </div>
 
@@ -695,21 +1514,11 @@
       <div class="post-meta mb-3">
         <i class="far fa-folder-open fa-fw me-1"></i>
         
-          <a href="/categories/nek5000/">nek5000</a>
+          <a href="/categories/dmd/">DMD</a>
       </div>
     
 
     <!-- tags -->
-    
-      <div class="post-tags">
-        <i class="fa fa-tags fa-fw me-1"></i>
-        
-          <a
-            href="/tags/code/"
-            class="post-tag no-text-decoration"
-          >code</a>
-        
-      </div>
     
 
     <div
@@ -1351,22 +2160,18 @@
 
   
     <a
-      href="/posts/Method-FVM/"
+      href="/posts/%E4%B8%89%E7%BB%B4%E9%A1%B6%E7%9B%96%E9%A9%B1%E5%8A%A8%E6%96%B9%E8%85%94%E6%B5%81/"
       class="btn btn-outline-primary"
       aria-label="Older"
     >
-      <p>有限体积法介绍</p>
+      <p>三维顶盖驱动方腔流结果展示</p>
     </a>
   
 
   
-    <a
-      href="/posts/%E4%B8%89%E7%BB%B4%E9%A1%B6%E7%9B%96%E9%A9%B1%E5%8A%A8%E6%96%B9%E8%85%94%E6%B5%81/"
-      class="btn btn-outline-primary"
-      aria-label="Newer"
-    >
-      <p>三维顶盖驱动方腔流结果展示</p>
-    </a>
+    <div class="btn btn-outline-primary disabled" aria-label="Newer">
+      <p>-</p>
+    </div>
   
 </nav>
 
