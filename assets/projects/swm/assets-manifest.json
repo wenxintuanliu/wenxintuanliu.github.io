@@ -1,0 +1,37 @@
+{
+  "generatedFrom": "/home/chunfengfusu/MFC_run/runs/swm",
+  "items": [
+    {
+      "role": "hero",
+      "src": "assets/projects/swm/schlieren-evolution.gif",
+      "frames": [
+        "schlieren-frame-00000.png",
+        "schlieren-frame-00005.png",
+        "schlieren-frame-00010.png",
+        "schlieren-frame-00015.png",
+        "schlieren-frame-00020.png",
+        "schlieren-frame-00025.png",
+        "schlieren-frame-00030.png",
+        "schlieren-frame-00035.png",
+        "schlieren-frame-00040.png",
+        "schlieren-frame-00045.png",
+        "schlieren-frame-00050.png"
+      ]
+    },
+    {
+      "role": "pressure",
+      "src": "assets/projects/swm/pressure-midrun.png",
+      "step": 25
+    },
+    {
+      "role": "alpha2",
+      "src": "assets/projects/swm/inclusion-volume-final.png",
+      "step": 50
+    },
+    {
+      "role": "vorticity",
+      "src": "assets/projects/swm/vorticity-final.png",
+      "step": 50
+    }
+  ]
+}

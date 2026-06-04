@@ -1,0 +1,79 @@
+{
+  "generatedAt": "2026-05-10T07:34:42.859460+00:00",
+  "sourceFieldDirectory": "/mnt/e/BAE_data/new/new_Reob5000xi_2",
+  "streamlineSources": [
+    "/home/chunfengfusu/nek5000_44stats_Re1000/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png",
+    "/home/chunfengfusu/nek5000_44stats_Re1000_ob/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png",
+    "/home/chunfengfusu/nek5000_44stats_Re3200/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png",
+    "/home/chunfengfusu/nek5000_44stats_Re3200_ob/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png",
+    "/home/chunfengfusu/nek5000_44stats_Re5000/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png",
+    "/home/chunfengfusu/nek5000_44stats_Re5000_ob/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png"
+  ],
+  "slice": {
+    "plane": "z",
+    "level": 0.1,
+    "nx": 512,
+    "ny": 512
+  },
+  "method": "pysemtools Probes spectral interpolation with multiple_point_legendre_numpy for instantaneous vorticity GIF; existing y = 0.5 averaged streamline figures copied from local Nek5000 postprocessing.",
+  "items": [
+    {
+      "type": "animation",
+      "role": "feature",
+      "title": "Vorticity evolution on z = 0.1",
+      "src": "assets/projects/lid-obstacle/vorticity-z010-spectral512.gif",
+      "sourceDirectory": "/mnt/e/BAE_data/new/new_Reob5000xi_2",
+      "frameCount": 12,
+      "durationMs": 300,
+      "method": "pysemtools spectral interpolation on a z = 0.1 probe plane"
+    },
+    {
+      "type": "image",
+      "role": "mean-streamline",
+      "title": "Re = 1000, no obstacle",
+      "src": "assets/projects/lid-obstacle/mean-streamline-re1000-base.png",
+      "sourceFile": "/home/chunfengfusu/nek5000_44stats_Re1000/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png",
+      "method": "existing averaged streamline velocity plot on y = 0.5"
+    },
+    {
+      "type": "image",
+      "role": "mean-streamline",
+      "title": "Re = 1000, with obstacle",
+      "src": "assets/projects/lid-obstacle/mean-streamline-re1000-obstacle.png",
+      "sourceFile": "/home/chunfengfusu/nek5000_44stats_Re1000_ob/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png",
+      "method": "existing averaged streamline velocity plot on y = 0.5"
+    },
+    {
+      "type": "image",
+      "role": "mean-streamline",
+      "title": "Re = 3200, no obstacle",
+      "src": "assets/projects/lid-obstacle/mean-streamline-re3200-base.png",
+      "sourceFile": "/home/chunfengfusu/nek5000_44stats_Re3200/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png",
+      "method": "existing averaged streamline velocity plot on y = 0.5"
+    },
+    {
+      "type": "image",
+      "role": "mean-streamline",
+      "title": "Re = 3200, with obstacle",
+      "src": "assets/projects/lid-obstacle/mean-streamline-re3200-obstacle.png",
+      "sourceFile": "/home/chunfengfusu/nek5000_44stats_Re3200_ob/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png",
+      "method": "existing averaged streamline velocity plot on y = 0.5"
+    },
+    {
+      "type": "image",
+      "role": "mean-streamline",
+      "title": "Re = 5000, no obstacle",
+      "src": "assets/projects/lid-obstacle/mean-streamline-re5000-base.png",
+      "sourceFile": "/home/chunfengfusu/nek5000_44stats_Re5000/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png",
+      "method": "existing averaged streamline velocity plot on y = 0.5"
+    },
+    {
+      "type": "image",
+      "role": "mean-streamline",
+      "title": "Re = 5000, with obstacle",
+      "src": "assets/projects/lid-obstacle/mean-streamline-re5000-obstacle.png",
+      "sourceFile": "/home/chunfengfusu/nek5000_44stats_Re5000_ob/plot_a_fields/workflows/stream_vort/output/plane_y05_streamline_velocity.png",
+      "method": "existing averaged streamline velocity plot on y = 0.5"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "research-showcase",
+  "version": "2.0.0",
+  "description": "Data-driven research project showcase — high-fidelity CFD & scientific visualization",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve . -l 3000",
+    "preview": "npx serve . -l 8080",
+    "validate": "python3 tools/validate_site.py"
+  },
+  "keywords": ["cfd", "research", "showcase", "spectral-element"],
+  "license": "MIT"
+}

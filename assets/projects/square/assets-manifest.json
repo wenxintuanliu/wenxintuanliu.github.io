@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-06-03T16:12:04.644936+00:00",
+  "sourceData": "/home/chunfengfusu/Nek5000/run/square",
+  "items": [
+    {
+      "type": "animation",
+      "role": "hero",
+      "title": "Square Cylinder Flow Speed Field",
+      "src": "assets/projects/square/square_flow.gif",
+      "frameCount": 24,
+      "method": "Rendered from Nek5000 square0.f* output files"
+    }
+  ]
+}

@@ -3,29 +3,22 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CFD Research</title>
-    <meta name="description" content="高保真流体计算、数值方法与科学可视化。">
+    <title>方法文章 | CFD Research</title>
+    <meta name="description" content="由 Markdown 编写的方法文章。">
     <meta name="theme-color" content="#0d9488">
-    <meta property="og:title" content="CFD Research">
-    <meta property="og:description" content="高保真流体计算、数值方法与科学可视化科研展示站。">
-    <meta property="og:type" content="website">
+    <meta property="og:title" content="文章 | CFD Research">
+    <meta property="og:description" content="由 Markdown 编写的方法文章。">
+    <meta property="og:type" content="article">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="index.html">
-    <link rel="icon" href="assets/profile.png" type="image/png">
-    <link rel="alternate" type="application/rss+xml" title="CFD Research Feed" href="meta/feed.xml">
+    <link rel="canonical" href="method.html">
+    <link rel="icon" href="../assets/profile.png" type="image/png">
+    <link rel="alternate" type="application/rss+xml" title="CFD Research Feed" href="../meta/feed.xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/layout.css">
-    <link rel="stylesheet" href="styles/project.css">
-    <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.getRegistrations().then((registrations) => {
-          registrations.forEach((registration) => registration.unregister());
-        });
-      }
-    </script>
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/project.css">
     <script>
       window.MathJax = {
         tex: {
@@ -39,12 +32,12 @@
     </script>
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   </head>
-  <body data-page="home">
+  <body data-page="article">
     <div id="app" class="app-shell" aria-live="polite">
       <noscript>
         <main class="error-state">
           <h1>需要启用 JavaScript</h1>
-          <p>本站使用静态 JSON 数据渲染项目、文章和知识库导航。请启用 JavaScript 后访问。</p>
+          <p>文章由静态 JSON 数据渲染。请启用 JavaScript 后访问。</p>
         </main>
       </noscript>
       <div class="loading-screen">
@@ -52,6 +45,6 @@
         <span>Loading research data...</span>
       </div>
     </div>
-    <script type="module" src="modules/app.js"></script>
+    <script type="module" src="../modules/app.js"></script>
   </body>
 </html>

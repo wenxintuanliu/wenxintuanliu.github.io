@@ -1,0 +1,184 @@
+{
+  "siteTitle": "CFD Research",
+  "siteSubtitle": "High-fidelity CFD, numerical methods, and reproducible scientific visualization",
+  "author": {
+    "name": "Chunfeng Fusu",
+    "title": "Undergraduate researcher in computational fluid dynamics",
+    "email": "3403208087@qq.com",
+    "github": "https://github.com/wenxintuanliu/"
+  },
+  "profile": {
+    "direction": "数值模拟、分析方法与可视化",
+    "summary": "记录各个数值模拟工况与相关分析方法",
+    "strengths": [
+      "Nek5000 / NekRS 高阶谱元计算",
+      "GCN-AE 非结构流场降维与重构",
+      "HODMD 圆柱尾迹模态分解与外推",
+      "MFC 可压缩多相流算例设计"
+    ]
+  },
+  "projects": [
+    {
+      "id": "cyl4",
+      "title": "圆柱绕流的 GCN-AE 降维与重构",
+      "category": "Graph Reduced-Order Modeling",
+      "content": "content/projects/cyl4.md",
+      "featured": true
+    },
+    {
+      "id": "cylinder-hodmd",
+      "title": "圆柱绕流的 HODMD 模态分解与外推",
+      "category": "Modal Decomposition",
+      "content": "content/projects/cylinder-hodmd.md",
+      "featured": false,
+      "facts": [
+        { "label": "雷诺数", "value": "100" },
+        { "label": "分解范围/s", "value": "120-180" },
+        { "label": "外推范围/s", "value": "180-200" },
+        { "label": "主频率", "value": "0.179" }
+        ]
+    },
+    {
+      "id": "lid-obstacle",
+      "title": "顶盖驱动方腔流的含障碍物数值模拟",
+      "category": "High-fidelity cavity flow",
+      "content": "content/projects/lid-obstacle.md",
+      "featured": false,
+      "facts": [
+        { "label": "雷诺数", "value": "1000-5000" },
+        { "label": "障碍物尺寸", "value": "0.2^3" },
+        { "label": "计算时间范围", "value": "1500以上" },
+        { "label": "数模方法", "value": "高保真谱元数值模拟" }
+        ]
+    },
+    {
+      "id": "swm",
+      "title": "冲击波多相混合算例",
+      "category": "Compressible Multiphase Flow",
+      "content": "content/projects/swm.md",
+      "featured": false
+    },
+    {
+      "id": "square",
+      "title": "方柱绕流的非定常数值模拟",
+      "category": "Computational Fluid Dynamics",
+      "content": "content/projects/square.md",
+      "featured": false,
+      "facts": [
+        {
+          "label": "求解器",
+          "value": "Nek5000"
+        },
+        {
+          "label": "几何",
+          "value": "方形截面柱体"
+        },
+        {
+          "label": "展示变量",
+          "value": "|u|"
+        },
+        {
+          "label": "预览",
+          "value": "瞬态 GIF"
+        }
+      ]
+    }
+  ],
+  "methodArticles": [
+    {
+      "id": "spectral-element-notes",
+      "title": "谱元法网页化方法：从高阶场文件到可读证据",
+      "category": "Methods",
+      "content": "content/methods/spectral-element-notes.md",
+      "featured": true
+    },
+    {
+      "id": "compressible-multiphase-workflow",
+      "title": "MFC 多相流工作流：冲击波、界面与固定画布后处理",
+      "category": "Method",
+      "content": "content/methods/compressible-multiphase-workflow.md",
+      "featured": true
+    },
+    {
+      "id": "gcn-notes",
+      "title": "图卷积网络：非结构流场上的局部信息聚合",
+      "category": "Method",
+      "content": "content/methods/gcn-notes.md",
+      "featured": true
+    },
+    {
+      "id": "autoencoder-notes",
+      "title": "Autoencoder ROM：从高维流场到可解码隐变量",
+      "category": "Method",
+      "content": "content/methods/autoencoder-notes.md",
+      "featured": true
+    },
+    {
+      "id": "hodmd-notes",
+      "title": "HODMD：用延迟嵌入提取圆柱尾迹频率与模态",
+      "category": "Method",
+      "content": "content/methods/hodmd-notes.md",
+      "featured": true
+    },
+    {
+      "id": "markdown-style-gallery",
+      "title": "Markdown 样式示例：科研文章组件画廊",
+      "category": "Style Guide",
+      "content": "content/example/markdown-style-gallery.md",
+      "featured": false,
+      "hidden": true
+    }
+  ],
+  "methods": [
+    {
+      "id": "graph-convolutional-network",
+      "title": "图卷积网络",
+      "summary": "在非结构圆柱绕流平面上通过邻接传播聚合局部节点信息。",
+      "tags": [
+        "数值方法"
+      ],
+      "status": "working",
+      "article": "gcn-notes"
+    },
+    {
+      "id": "autoencoder-rom",
+      "title": "自编码器降阶表示",
+      "summary": "用 encoder-decoder 将高维流场压缩成可解码 latent coordinates。",
+      "tags": [
+        "数值方法"
+      ],
+      "status": "working",
+      "article": "autoencoder-notes"
+    },
+    {
+      "id": "higher-order-dmd",
+      "title": "高阶动态模态分解",
+      "summary": "用延迟嵌入 DMD 提取周期流动的频率、增长率和空间模态。",
+      "tags": [
+        "数值方法"
+      ],
+      "status": "working",
+      "article": "hodmd-notes"
+    },
+    {
+      "id": "spectral-element",
+      "title": "谱元法",
+      "summary": "Nek/NekRS 项目使用高阶谱元离散，并通过 pysemtools probes 做网页图像采样。",
+      "tags": [
+        "数值方法"
+      ],
+      "status": "evergreen",
+      "article": "spectral-element-notes"
+    },
+    {
+      "id": "compressible-multiphase",
+      "title": "可压缩多相流工作流",
+      "summary": "MFC 算例围绕冲击波、界面相互作用和固定画布后处理动画组织。",
+      "tags": [
+        "数值方法"
+      ],
+      "status": "working",
+      "article": "compressible-multiphase-workflow"
+    }
+  ]
+}

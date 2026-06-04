@@ -1,0 +1,103 @@
+{
+  "generatedAt": "2026-05-31T13:04:42.372263+00:00",
+  "sourceDirectory": "/home/chunfengfusu/NekRS_run/cyl/z2_plane_gnn/hodmd",
+  "items": [
+    {
+      "type": "image",
+      "role": "eigenvalues",
+      "title": "Eigenvalues",
+      "src": "assets/projects/cylinder-hodmd/eigenvalues_plot.png",
+      "method": "HODMD d=50 postprocess output"
+    },
+    {
+      "type": "image",
+      "role": "mode-01",
+      "title": "Mode 01",
+      "src": "assets/projects/cylinder-hodmd/mode_01_d50.png",
+      "method": "HODMD d=50 postprocess output"
+    },
+    {
+      "type": "image",
+      "role": "mode-03",
+      "title": "Mode 03",
+      "src": "assets/projects/cylinder-hodmd/mode_03_d50.png",
+      "method": "HODMD d=50 postprocess output"
+    },
+    {
+      "type": "image",
+      "role": "mode-05",
+      "title": "Mode 05",
+      "src": "assets/projects/cylinder-hodmd/mode_05_d50.png",
+      "method": "HODMD d=50 postprocess output"
+    },
+    {
+      "type": "image",
+      "role": "reconstruction",
+      "title": "Reconstruction",
+      "src": "assets/projects/cylinder-hodmd/reconstruction_t0151_src0151_d50.png",
+      "method": "HODMD d=50 postprocess output"
+    },
+    {
+      "type": "image",
+      "role": "prediction",
+      "title": "Prediction",
+      "src": "assets/projects/cylinder-hodmd/compare_t0351_src0351_d50.png",
+      "method": "HODMD d=50 postprocess output"
+    }
+  ],
+  "metrics": {
+    "mainReport": {
+      "Tensor size": "[2 23778 301]",
+      "dt": "0.200000000001",
+      "source_train_indices": "1:301",
+      "source_val_indices": "302:401",
+      "train_snapshot_count": "301",
+      "validation_snapshot_count": "100",
+      "d_values": "50",
+      "varepsilon_svd": "1.000e-06",
+      "varepsilon_mode": "1.000e-02",
+      "Final train zero-mean RRMSE": 0.01969406381249,
+      "Final train physical RRMSE": 0.003507814125559,
+      "Validation physical RRMSE": 0.003511145718515
+    },
+    "reconstruction": {
+      "u": {
+        "rmse": 0.001467538382968,
+        "mae": 0.000733224012737,
+        "rel_l2": 0.001555277366172
+      },
+      "v": {
+        "rmse": 0.003100322681024,
+        "mae": 0.001531903195832,
+        "rel_l2": 0.01475737322592
+      },
+      "global_rel_l2": 0.003548302883104
+    },
+    "prediction": [
+      {
+        "local_step": 302,
+        "source_snapshot": 302,
+        "time": 180.2000000001,
+        "global_rel_l2": 0.003559195776777,
+        "u_rel_l2": 0.001560947763479,
+        "v_rel_l2": 0.01480521063932
+      },
+      {
+        "local_step": 351,
+        "source_snapshot": 351,
+        "time": 190.0000000002,
+        "global_rel_l2": 0.003476953944743,
+        "u_rel_l2": 0.001523076398046,
+        "v_rel_l2": 0.0146938879815
+      },
+      {
+        "local_step": 401,
+        "source_snapshot": 401,
+        "time": 200.0000000002,
+        "global_rel_l2": 0.003455969030578,
+        "u_rel_l2": 0.001518031271985,
+        "v_rel_l2": 0.01440458003347
+      }
+    ]
+  }
+}

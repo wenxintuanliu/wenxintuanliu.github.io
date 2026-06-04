@@ -1,0 +1,34 @@
+{
+  "updatedAt": "2026-05-31",
+  "maturity": {
+    "seedling": "早期想法或待补证据",
+    "working": "已有结果，仍在补充论证",
+    "evergreen": "结构稳定，可作为代表材料",
+    "archived": "保留记录，不再主动维护"
+  },
+  "readingPaths": [
+    {
+      "id": "application",
+      "title": "申请展示路径",
+      "description": "先看代表项目，再看模态分解、流动控制和多相流项目。",
+      "items": [
+        { "type": "project", "id": "cyl4" },
+        { "type": "project", "id": "cylinder-hodmd" },
+        { "type": "project", "id": "lid-obstacle" },
+        { "type": "project", "id": "swm" }
+      ]
+    },
+    {
+      "id": "methods",
+      "title": "数值方法路径",
+      "description": "从 GCN、AE、HODMD 到谱元和 MFC 后处理，理解模型与证据如何连接。",
+      "items": [
+        { "type": "article", "id": "gcn-notes" },
+        { "type": "article", "id": "autoencoder-notes" },
+        { "type": "article", "id": "hodmd-notes" },
+        { "type": "article", "id": "spectral-element-notes" },
+        { "type": "article", "id": "compressible-multiphase-workflow" }
+      ]
+    }
+  ]
+}
