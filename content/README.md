@@ -80,6 +80,16 @@ summary: 一句话摘要，会出现在列表页和详情页。
 ---
 ```
 
+## 修改状态
+
+项目或方法文章的状态直接改对应 Markdown 顶部 front matter：
+
+```yaml
+status: seedling
+```
+
+可用状态建议保持四档：`seedling`、`working`、`evergreen`、`archived`。例如方柱项目就在 `content/projects/square.md` 顶部修改。
+
 支持的正文样式：
 
 - `##` / `###` 标题会自动进入右侧目录。

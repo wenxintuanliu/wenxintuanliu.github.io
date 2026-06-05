@@ -3,7 +3,7 @@ title: 方柱绕流的非定常数值模拟
 type: project
 subtitle: Nek5000 / 方形截面柱体绕流
 category: Computational Fluid Dynamics
-status: evergreen
+status: seedling
 publishedAt: 2026-06-03
 updatedAt: 2026-06-04
 readingMinutes: 5

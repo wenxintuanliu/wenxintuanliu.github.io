@@ -30,6 +30,9 @@ export function renderShell(registry, content, currentPage = "home") {
     </header>
   `;
   root.append(content);
+  if (activePage !== "home") {
+    root.append(createSiteFooter(registry));
+  }
   root.append(createScrollTop());
 
   requestAnimationFrame(() => {
@@ -39,6 +42,7 @@ export function renderShell(registry, content, currentPage = "home") {
     initLightbox();
     initExplorables();
     initComparePanels();
+    initLazyImages();
     initCodeCopy();
     initArchiveSearch();
     typesetMath();
@@ -56,29 +60,48 @@ function createScrollTop() {
   return btn;
 }
 
+function createSiteFooter(registry) {
+  const footer = document.createElement("footer");
+  footer.className = "site-footer";
+  footer.innerHTML = `
+    <span class="footer-left">All rights reserved.<a class="secret-entry" href="${sitePath("pages/method.html?id=markdown-style-gallery")}" aria-label="Markdown 样式示例隐藏入口"><img src="${sitePath("assets/secret-entry.png")}" alt=""></a></span>
+    <span>Created by <a href="${escapeHtml(registry.author?.github ?? "https://github.com/wenxintuanliu/")}" target="_blank" rel="noreferrer">Chunfeng Fusu ${githubIcon()}</a></span>
+  `;
+  return footer;
+}
+
 function initThemeToggle() {
   const toggle = document.getElementById("theme-toggle");
   if (!toggle) return;
 
   const saved = localStorage.getItem("theme");
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const theme = saved || (prefersDark ? "dark" : "light");
+  const theme = ["light", "dark", "vivid"].includes(saved) ? saved : (prefersDark ? "dark" : "light");
   applyTheme(theme);
 
   toggle.addEventListener("click", () => {
     const current = document.documentElement.getAttribute("data-theme") || "light";
-    const next = current === "dark" ? "light" : "dark";
+    const next = current === "light" ? "dark" : current === "dark" ? "vivid" : "light";
     applyTheme(next);
     localStorage.setItem("theme", next);
   });
 }
 
 function applyTheme(theme) {
+  document.documentElement.classList.add("theme-changing");
   document.documentElement.setAttribute("data-theme", theme);
   const toggle = document.getElementById("theme-toggle");
   if (toggle) {
-    toggle.innerHTML = theme === "dark" ? sunIcon() : moonIcon();
+    const labels = {
+      light: "当前为白天主题，点击切换到黑夜主题",
+      dark: "当前为黑夜主题，点击切换到清新主题",
+      vivid: "当前为清新主题，点击切换到白天主题",
+    };
+    toggle.setAttribute("aria-label", labels[theme] ?? labels.light);
+    toggle.title = labels[theme] ?? labels.light;
+    toggle.innerHTML = theme === "dark" ? paletteIcon() : theme === "vivid" ? sunIcon() : moonIcon();
   }
+  window.setTimeout(() => document.documentElement.classList.remove("theme-changing"), 80);
 }
 
 function initMobileNav() {
@@ -183,6 +206,32 @@ function initComparePanels() {
   });
 }
 
+function initLazyImages() {
+  const images = [...document.querySelectorAll("img[data-lazy-src]")];
+  if (!images.length) return;
+
+  const load = (img) => {
+    if (!img.dataset.lazySrc) return;
+    img.src = img.dataset.lazySrc;
+    img.removeAttribute("data-lazy-src");
+  };
+
+  if (!("IntersectionObserver" in window)) {
+    images.forEach(load);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      load(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: "180px" });
+
+  images.forEach((img) => observer.observe(img));
+}
+
 function initCodeCopy() {
   document.querySelectorAll("[data-copy-code]").forEach((button) => {
     button.addEventListener("click", async () => {
@@ -214,14 +263,36 @@ function initArchiveSearch() {
   });
 }
 
-function typesetMath(attempt = 0) {
-  if (window.MathJax?.typesetPromise) {
-    window.MathJax.typesetPromise().catch(() => {});
-    return;
-  }
-  if (attempt < 12) {
-    window.setTimeout(() => typesetMath(attempt + 1), 250);
-  }
+function typesetMath() {
+  if (!document.querySelector(".md-math, .md-inline-math")) return;
+  loadMathJax().then(() => window.MathJax?.typesetPromise?.()).catch(() => {});
+}
+
+let mathJaxPromise = null;
+
+function loadMathJax() {
+  if (window.MathJax?.typesetPromise) return Promise.resolve();
+  if (mathJaxPromise) return mathJaxPromise;
+
+  window.MathJax = {
+    tex: {
+      inlineMath: [["\\(", "\\)"]],
+      displayMath: [["\\[", "\\]"]],
+      processEscapes: true,
+    },
+    svg: { fontCache: "global" },
+    options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] },
+  };
+
+  mathJaxPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js";
+    script.async = true;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.append(script);
+  });
+  return mathJaxPromise;
 }
 
 function readPanelData(panel) {
@@ -296,6 +367,14 @@ function sunIcon() {
 
 function moonIcon() {
   return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+}
+
+function paletteIcon() {
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 0 0 0 18h1.5a2 2 0 0 0 1.43-3.4 1.1 1.1 0 0 1 .77-1.88H17a4 4 0 0 0 0-8h-1.2A4.8 4.8 0 0 0 12 3Z"/><circle cx="7.5" cy="10" r=".7"/><circle cx="10.5" cy="7.5" r=".7"/><circle cx="14" cy="8" r=".7"/></svg>`;
+}
+
+function githubIcon() {
+  return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2C6.48 2 2 6.59 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.9c-2.78.62-3.37-1.22-3.37-1.22-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05A9.27 9.27 0 0 1 12 6.93c.85 0 1.7.12 2.5.35 1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.46.1 2.72.64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.81-4.57 5.07.36.32.68.95.68 1.92v2.79c0 .27.18.59.69.49A10.08 10.08 0 0 0 22 12.25C22 6.59 17.52 2 12 2Z"/></svg>`;
 }
 
 function menuIcon() {

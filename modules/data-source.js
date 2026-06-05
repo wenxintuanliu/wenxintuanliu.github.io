@@ -39,7 +39,7 @@ export async function loadArticles(articleEntries = []) {
 
 async function loadJson(path) {
   const url = new URL(path, SITE_ROOT);
-  const response = await fetch(url, { cache: "no-store" });
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`${path}: ${response.status} ${response.statusText}`);
   }
@@ -48,7 +48,7 @@ async function loadJson(path) {
 
 async function loadText(path) {
   const url = new URL(path, SITE_ROOT);
-  const response = await fetch(url, { cache: "no-store" });
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`${path}: ${response.status} ${response.statusText}`);
   }

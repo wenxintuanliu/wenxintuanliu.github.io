@@ -3,7 +3,7 @@ title: 圆柱绕流的 GCN-AE 降维与重构
 type: project
 subtitle: NekRS z=2 plane / Graph Convolutional Autoencoder
 category: Graph Reduced-Order Modeling
-status: evergreen
+status: seedling
 publishedAt: 2026-05-09
 updatedAt: 2026-05-31
 readingMinutes: 8

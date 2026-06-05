@@ -40,7 +40,7 @@ export function renderHomePage({ registry, projects, articles, featuredProject }
         ${featuredMedia ? homeMediaVisual(featuredMedia, featuredProject) : ""}
       </div>
       <footer class="hero-footer section-wrap">
-        <span class="footer-left">All rights reserved.<a class="secret-entry" href="${sitePath("pages/method.html?id=markdown-style-gallery")}" aria-label="Markdown 样式示例隐藏入口"><img src="${sitePath("assets/头像3.png")}" alt=""></a></span>
+        <span class="footer-left">All rights reserved.<a class="secret-entry" href="${sitePath("pages/method.html?id=markdown-style-gallery")}" aria-label="Markdown 样式示例隐藏入口"><img src="${sitePath("assets/secret-entry.png")}" alt=""></a></span>
         <span>Created by <a href="${esc(registry.author?.github ?? "https://github.com/wenxintuanliu/")}" target="_blank" rel="noreferrer">Chunfeng Fusu ${githubIcon()}</a></span>
       </footer>
     </section>
@@ -291,7 +291,7 @@ function homeMediaVisual(item, project) {
 }
 
 function projectPreview(item) {
-  return `<figure class="project-preview"><img src="${esc(sitePath(item.src))}" alt="${esc(item.title)}" loading="lazy" decoding="async" fetchpriority="low"></figure>`;
+  return `<figure class="project-preview"><img data-lazy-src="${esc(sitePath(item.src))}" alt="${esc(item.title)}" loading="lazy" decoding="async" fetchpriority="low"></figure>`;
 }
 
 function inlineFigure(role, media, figures = []) {

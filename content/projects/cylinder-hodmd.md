@@ -3,7 +3,7 @@ title: 圆柱绕流的 HODMD 模态分解与外推
 type: project
 subtitle: Higher Order Dynamic Mode Decomposition on NekRS z=2 plane
 category: Modal Decomposition
-status: working
+status: seedling
 publishedAt: 2026-05-31
 updatedAt: 2026-05-31
 readingMinutes: 9

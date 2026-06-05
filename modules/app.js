@@ -8,9 +8,15 @@ const currentPage = document.body.dataset.page ?? "home";
 async function boot() {
   try {
     const registry = await loadRegistry();
-    const content = await loadContentIndex();
-    const projects = await loadProjects(registry.projects);
-    const articles = await loadArticles(registry.methodArticles ?? registry.articles ?? []);
+    const route = pageKind();
+    const needsProjects = ["home", "projects", "methods", "knowledge", "project-detail", "article"].includes(route);
+    const needsArticles = ["knowledge", "project-detail", "article"].includes(route);
+    const needsContent = route === "knowledge";
+    const [content, projects, articles] = await Promise.all([
+      needsContent ? loadContentIndex() : Promise.resolve({}),
+      needsProjects ? loadProjects(registry.projects) : Promise.resolve([]),
+      needsArticles ? loadArticles(registry.methodArticles ?? registry.articles ?? []) : Promise.resolve(minimalArticles(registry)),
+    ]);
     const featuredProject = projects.find((project) => project.featured) ?? projects[0];
     const requestedProjectId = new URLSearchParams(window.location.search).get("id");
     const requestedArticleId = new URLSearchParams(window.location.search).get("id");
@@ -21,9 +27,9 @@ async function boot() {
       content,
       projects,
       articles,
-      project: activeProject.data,
+      project: activeProject?.data,
       article: activeArticle?.data,
-      featuredProject: featuredProject.data,
+      featuredProject: featuredProject?.data,
     };
     updateDocumentMeta(currentPage, context);
     app.innerHTML = "";
@@ -37,6 +43,29 @@ async function boot() {
       </main>
     `;
   }
+}
+
+function pageKind() {
+  const path = window.location.pathname;
+  if (path.endsWith("/pages/project.html")) return "project-detail";
+  if (path.endsWith("/pages/method.html")) return "article";
+  if (path.endsWith("/pages/projects.html")) return "projects";
+  if (path.endsWith("/pages/methods.html")) return "methods";
+  if (path.endsWith("/pages/knowledge.html")) return "knowledge";
+  if (path.endsWith("/pages/about.html")) return "about";
+  return currentPage;
+}
+
+function minimalArticles(registry) {
+  return (registry.methodArticles ?? registry.articles ?? []).map((entry) => ({
+    ...entry,
+    data: {
+      ...entry,
+      metadata: entry.metadata ?? {},
+      hidden: entry.hidden,
+      summary: entry.summary ?? "",
+    },
+  }));
 }
 
 function updateDocumentMeta(page, context) {
