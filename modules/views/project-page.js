@@ -49,6 +49,11 @@ export function renderHomePage({ registry, projects, articles, featuredProject }
 }
 
 export function renderProjectsPage({ projects }) {
+  const perPage = 4;
+  const totalPages = Math.max(1, Math.ceil(projects.length / perPage));
+  const currentPage = boundedPageNumber(new URLSearchParams(window.location.search).get("page"), totalPages);
+  const start = (currentPage - 1) * perPage;
+  const visibleProjects = projects.slice(start, start + perPage);
   const main = pageMain("project-page");
   main.innerHTML = `
     <section class="page-hero section-wrap animate-in">
@@ -58,8 +63,9 @@ export function renderProjectsPage({ projects }) {
     </section>
     <section class="project-section section-wrap">
       <div class="project-grid compact-list">
-        ${projects.map((entry, i) => projectListCard(entry.data, i)).join("")}
+        ${visibleProjects.map((entry, i) => projectListCard(entry.data, start + i)).join("")}
       </div>
+      ${projectPagination(currentPage, totalPages)}
     </section>
   `;
   return main;
@@ -292,6 +298,30 @@ function homeMediaVisual(item, project) {
 
 function projectPreview(item) {
   return `<figure class="project-preview"><img data-lazy-src="${esc(sitePath(item.src))}" alt="${esc(item.title)}" loading="lazy" decoding="async" fetchpriority="low"></figure>`;
+}
+
+function boundedPageNumber(value, totalPages) {
+  const page = Number.parseInt(value ?? "1", 10);
+  if (!Number.isFinite(page)) return 1;
+  return Math.min(Math.max(page, 1), totalPages);
+}
+
+function projectPagination(currentPage, totalPages) {
+  if (totalPages <= 1) return "";
+  const pageLink = (page, label = page, className = "") => {
+    const active = page === currentPage;
+    return `<a class="${className}${active ? " is-active" : ""}" href="${sitePath(`pages/projects.html?page=${page}`)}"${active ? ' aria-current="page"' : ""}>${esc(label)}</a>`;
+  };
+  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+  return `
+    <nav class="pagination project-pagination" aria-label="项目分页">
+      ${currentPage > 1 ? pageLink(currentPage - 1, "上一页", "pagination-edge") : `<span class="pagination-edge is-disabled">上一页</span>`}
+      <div class="pagination-pages">
+        ${pages.map((page) => pageLink(page)).join("")}
+      </div>
+      ${currentPage < totalPages ? pageLink(currentPage + 1, "下一页", "pagination-edge") : `<span class="pagination-edge is-disabled">下一页</span>`}
+    </nav>
+  `;
 }
 
 function inlineFigure(role, media, figures = []) {

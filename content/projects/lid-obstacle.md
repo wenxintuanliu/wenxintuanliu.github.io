@@ -22,9 +22,6 @@ dataAvailability: 平均流线图和涡量 GIF 已发布在 assets/projects/lid-
 summary: 顶盖驱动方腔流在 Re = 1000、3200、5000 下进行无障碍物与含障碍物对比。
 ---
 
-## 研究问题
-
-在顶盖驱动方腔流中，内部障碍物如何改变不同 Reynolds 数下的平均环流结构与近壁涡量演化？
 
 ## 对照方式
 
@@ -45,11 +42,7 @@ summary: 顶盖驱动方腔流在 Re = 1000、3200、5000 下进行无障碍物�
 ![Re = 5000, with obstacle](assets/projects/lid-obstacle/mean-streamline-re5000-obstacle.webp "Averaged streamline plot, y = 0.5")
 
 :::note 阅读提示
-平均流线图用于比较长期结构，涡量动画用于观察瞬态剪切层。两者回答的问题不同，不应混成同一种证据。
+平均流线图用于比较长期结构，涡量动画用于观察瞬态剪切层。
 :::
 
-## 后续计划
 
-- 把平均统计量与瞬态结构放在同一坐标系中比较。
-- 补充障碍物附近局部速度剖面。
-- 增加 Re 变化对次级涡结构的定量说明。

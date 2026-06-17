@@ -69,7 +69,7 @@ $$
 
 ## 连续时间重构
 
-DMD/HODMD 得到的离散特征值可转换为连续时间增长率和频率：
+HODMD 得到的离散特征值可转换为连续时间增长率和频率：
 
 $$
 \omega_j=\frac{\log(\lambda_j)}{\Delta t}=\delta_j+i\nu_j.
