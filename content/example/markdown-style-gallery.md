@@ -99,13 +99,13 @@ python3 tools/validate_site.py
 
 普通 Markdown 图片会自动生成论文式编号和图注：
 
-![GCN-AE reconstruction example](assets/projects/cyl4/gcn-ae-reconstruction-t0450.png "GCN-AE 重构质量图作为普通 Markdown 图片示例。")
+![GCN-AE reconstruction example](assets/projects/cyl4/gcn-ae-reconstruction-t0400.png "GCN-AE 重构质量图作为普通 Markdown 图片示例。")
 
 ## Compare 短代码
 
 `{{ compare:left,right }}` 可以直接比较两张图，适合用来检查重构、预测或不同后处理方案的差异：
 
-{{ compare:assets/projects/cyl4/gcn-ae-reconstruction-t0450.png,assets/projects/cylinder-hodmd/reconstruction_t0151_src0151_d50.png }}
+{{ compare:assets/projects/cyl4/gcn-ae-reconstruction-t0400.png,assets/projects/cylinder-hodmd/reconstruction_t0151_src0151_d50.png }}
 
 ## 脚注与引用
 

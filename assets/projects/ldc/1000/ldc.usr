@@ -1,0 +1,400 @@
+c-----------------------------------------------------------------------
+c
+c     Nek5000 user file for 3D lid-driven cavity
+c
+c     BC mapping from .re2 boundary IDs (set in usrdat2):
+c       ID=2 -> moving lid (v), ux = -1
+c       ID=3 -> stationary wall (W)
+c
+C-----------------------------------------------------------------------
+      subroutine userchk
+      include 'SIZE'
+      include 'TOTAL'
+      include 'FRAMELP'
+
+c     Toolbox statistics + retained runtime diagnostics:
+c       - i20/ins instantaneous outputs
+c       - hpts sampling
+c       - volume-averaged kinetic-energy history
+
+      real    t_inst_start, t_inst_end, t_inst_freq, t_next_inst
+      real    t_inst20_freq, t_next_inst20
+      real    t_hpts_freq, t_next_hpts
+      real    t_ek_freq, t_next_ek
+      real    eps, dt_floor, endtime_guard
+      real    ek, volume_total
+      integer itmp, nfield1, istep_last_ins
+      logical near_end_warned, force_last_write
+
+      save    t_next_inst, t_next_inst20, t_next_hpts
+     &      , t_next_ek, near_end_warned, istep_last_ins
+      data    t_next_inst / -1.0 /
+      data    t_next_inst20 / -1.0 /
+      data    t_next_hpts / -1.0 /
+      data    t_next_ek / -1.0 /
+      data    near_end_warned / .false. /
+      data    istep_last_ins / -1 /
+
+      if (istep.eq.0) then
+         call frame_start
+         return
+      endif
+
+      call frame_monitor
+      call stat_avg
+
+      eps          = 1.0e-9
+      dt_floor     = 1.0e-8
+      endtime_guard= 1.0e-3
+
+      t_inst_start = 299.0
+      t_inst_end   = 300.0
+      t_inst_freq  = 1
+
+      t_inst20_freq= 20.0
+
+      t_hpts_freq  = 0.004
+      t_ek_freq    = 0.02
+
+c     Detect final-step condition early so all output branches can use it
+c     in this same userchk call.
+      force_last_write = .false.
+      if (lastep.eq.1) force_last_write = .true.
+      if (fintim.ne.0.0) then
+         if (time + 0.5*dt .ge. fintim-eps) then
+            lastep = 1
+            force_last_write = .true.
+         endif
+      endif
+
+      nfield1 = lx1*ly1*lz1*nelv
+
+      if (t_next_ek.lt.0.0) then
+         t_next_ek = t_ek_freq
+         if (time.gt.t_ek_freq) then
+            itmp = int(time/t_ek_freq) + 1
+            t_next_ek = itmp*t_ek_freq
+         endif
+      endif
+
+c     Volume-averaged kinetic energy sampled every t_ek_freq.
+      if (istep.eq.1 .or. time.ge.(t_next_ek-eps) .or.
+     &    force_last_write) then
+         volume_total = volvm1
+         ek = 0.5*(glsc3(vx,vx,bm1,nfield1)
+     &           + glsc3(vy,vy,bm1,nfield1)
+     &           + glsc3(vz,vz,bm1,nfield1))/volume_total
+
+         if (nid.eq.0) call write_ek_record(istep,time,dt,ek)
+
+         if (time.ge.(t_next_ek-eps)) then
+            t_next_ek = t_next_ek + t_ek_freq
+            if (t_next_ek.le.time+eps) then
+               itmp = int(time/t_ek_freq) + 1
+               t_next_ek = itmp*t_ek_freq
+            endif
+         endif
+      endif
+
+      if (t_next_inst.lt.0.0) then
+         t_next_inst = t_inst_start
+         if (time.gt.t_inst_start) then
+            itmp = int((time-t_inst_start)/t_inst_freq) + 1
+            t_next_inst = t_inst_start + itmp*t_inst_freq
+         endif
+      endif
+
+c     Coarse restart snapshots before dense window.
+      if (t_next_inst20.lt.0.0) then
+         t_next_inst20 = t_inst20_freq
+         if (time.gt.t_inst20_freq) then
+            itmp = int(time/t_inst20_freq) + 1
+            t_next_inst20 = itmp*t_inst20_freq
+         endif
+      endif
+
+c     History points sampled at fixed physical-time interval.
+      if (t_next_hpts.lt.0.0) then
+         t_next_hpts = t_hpts_freq
+         if (time.gt.t_hpts_freq) then
+            itmp = int(time/t_hpts_freq) + 1
+            t_next_hpts = itmp*t_hpts_freq
+         endif
+      endif
+
+      if (time.lt.(t_inst_start-eps)) then
+         if (time.ge.(t_next_inst20-eps)) then
+            call outpost2(vx,vy,vz,pr,t,0,'i20')
+            t_next_inst20 = t_next_inst20 + t_inst20_freq
+            if (t_next_inst20.le.time+eps) then
+               itmp = int(time/t_inst20_freq) + 1
+               t_next_inst20 = itmp*t_inst20_freq
+            endif
+         endif
+      endif
+
+c     Dense snapshots in [t_inst_start, t_inst_end].
+c     Keep a final-step fallback independent of the window bounds.
+      if ((time.ge.(t_inst_start-eps) .and.
+     &     time.le.(t_inst_end+eps)) .or. force_last_write) then
+         if (time.ge.(t_next_inst-eps) .or. force_last_write) then
+            if (istep.ne.istep_last_ins) then
+               call outpost2(vx,vy,vz,pr,t,0,'ins')
+               istep_last_ins = istep
+            endif
+
+            itmp = int((time-t_inst_start)/t_inst_freq) + 1
+            t_next_inst = t_inst_start + itmp*t_inst_freq
+            if (t_next_inst.le.time+eps) then
+               t_next_inst = t_next_inst + t_inst_freq
+            endif
+         endif
+      endif
+
+      if (time.ge.(t_next_hpts-eps) .or. force_last_write) then
+         call hpts
+         t_next_hpts = t_next_hpts + t_hpts_freq
+         if (t_next_hpts.le.time+eps) then
+            itmp = int(time/t_hpts_freq) + 1
+            t_next_hpts = itmp*t_hpts_freq
+         endif
+      endif
+
+      if (dt.lt.dt_floor) then
+         if (fintim.ne.0.0 .and.
+     &       time.ge.(fintim-endtime_guard)) then
+            if (nid.eq.0 .and. .not.near_end_warned) then
+               write(6,*) 'WARN: dt<floor near endTime'
+               write(6,*) 'dt,step,time=', dt, istep, time
+            endif
+            near_end_warned = .true.
+         else
+            if (nid.eq.0) then
+               write(6,*) 'STOP: dt below floor', dt,
+     &              'at step/time', istep, time
+            endif
+            call exitt
+         endif
+      endif
+
+      if (istep.eq.nsteps .or. lastep.eq.1) then
+         call frame_end
+      endif
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine write_ek_record(istep,time,dt,ek)
+
+      integer istep, ek_unit
+      logical ek_exists
+      real time, dt, ek
+
+      ek_unit = 199
+
+      inquire(file='ek_history.txt',exist=ek_exists)
+      open(unit=ek_unit,file='ek_history.txt',
+     &     status='unknown',position='append')
+      if (.not.ek_exists) then
+         write(ek_unit,'(A)')
+     &      '# istep time dt E_k(volume-averaged kinetic energy)'
+      endif
+      write(ek_unit,'(I10,1X,1P3E20.12)') istep,time,dt,ek
+      close(ek_unit)
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userq(ix,iy,iz,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      qvol = 0.0
+      avol = 0.0
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userf(ix,iy,iz,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      ffx = 0.0
+      ffy = 0.0
+      ffz = 0.0
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine useric(ix,iy,iz,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      ux = 0.0
+      uy = 0.0
+      uz = 0.0
+      temp = 0.0
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine userbc(ix,iy,iz,iside,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      character cb*3
+      common /nekcb/ cb
+      real lid_velocity
+      parameter (lid_velocity = 1.0)
+
+      ux = 0.0
+      uy = 0.0
+      uz = 0.0
+
+c     usrdat2 maps ID=2 to cb='v  ', so only lid gets nonzero velocity.
+      if (cb.eq.'v  ' .or. cb.eq.'V  ') then
+         ux = lid_velocity
+         uy = 0.0
+         uz = 0.0
+      endif
+
+      temp = 0.0
+      flux = 0.0
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine usrdat
+      include 'SIZE'
+      include 'TOTAL'
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine usrdat2
+      include 'SIZE'
+      include 'TOTAL'
+
+      integer iel, ifc
+      real boundary_id
+
+      do iel=1,nelv
+         do ifc=1,2*ndim
+            boundary_id = bc(5,ifc,iel,1)
+
+            if (boundary_id.ne.0.0) then
+               if (abs(boundary_id-2.0).lt.0.1) then
+                  cbc(ifc,iel,1) = 'v  '
+               endif
+
+               if (abs(boundary_id-3.0).lt.0.1) then
+                  cbc(ifc,iel,1) = 'W  '
+               endif
+            endif
+         enddo
+      enddo
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine usrdat3
+      include 'SIZE'
+      include 'TOTAL'
+      return
+      end
+c-----------------------------------------------------------------------
+c Framework hooks for statistics toolbox
+      subroutine frame_usr_register
+      implicit none
+
+      include 'SIZE'
+      include 'FRAMELP'
+
+      call stat_register
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine frame_usr_init
+      implicit none
+
+      include 'SIZE'
+      include 'FRAMELP'
+
+      call stat_init
+
+      return
+      end
+c-----------------------------------------------------------------------
+      subroutine frame_usr_end
+      implicit none
+
+      include 'SIZE'
+      include 'FRAMELP'
+
+      call stat_end
+
+      return
+      end
+c-----------------------------------------------------------------------
+c Required by stat module: provide transformed velocity/derivatives.
+      subroutine user_stat_trnsv(lvel,dudx,dvdx,dwdx,vort,pres)
+      implicit none
+
+      include 'SIZE'
+      include 'SOLN'
+      include 'INPUT'
+
+      real lvel(LX1,LY1,LZ1,LELT,3)
+      real dudx(LX1,LY1,LZ1,LELT,3)
+      real dvdx(LX1,LY1,LZ1,LELT,3)
+      real dwdx(LX1,LY1,LZ1,LELT,3)
+      real vort(LX1,LY1,LZ1,LELT,3)
+      real pres(LX1,LY1,LZ1,LELT)
+
+      integer itmp
+
+      itmp = NX1*NY1*NZ1*NELV
+      call copy(lvel(1,1,1,1,1),VX,itmp)
+      call copy(lvel(1,1,1,1,2),VY,itmp)
+      call copy(lvel(1,1,1,1,3),VZ,itmp)
+
+      call gradm1(dudx(1,1,1,1,1),dudx(1,1,1,1,2),dudx(1,1,1,1,3),
+     $     lvel(1,1,1,1,1))
+      call gradm1(dvdx(1,1,1,1,1),dvdx(1,1,1,1,2),dvdx(1,1,1,1,3),
+     $     lvel(1,1,1,1,2))
+      call gradm1(dwdx(1,1,1,1,1),dwdx(1,1,1,1,2),dwdx(1,1,1,1,3),
+     $     lvel(1,1,1,1,3))
+
+      if (IF3D) then
+         call sub3(vort(1,1,1,1,1),dwdx(1,1,1,1,2),
+     $        dvdx(1,1,1,1,3),itmp)
+         call sub3(vort(1,1,1,1,2),dudx(1,1,1,1,3),
+     $        dwdx(1,1,1,1,1),itmp)
+      endif
+      call sub3(vort(1,1,1,1,3),dvdx(1,1,1,1,1),dudx(1,1,1,1,2),itmp)
+
+      return
+      end
+c-----------------------------------------------------------------------
+c Required by map2D symbol resolution; unused when stat_rdim=0.
+      subroutine user_map2d_get(idir,ctrs,cell,lctrs1,lctrs2,nelsort,
+     $     map_xm1,map_ym1,ierr)
+      implicit none
+
+      include 'SIZE'
+
+      integer idir, lctrs1, lctrs2, nelsort, ierr
+      real ctrs(lctrs1,lctrs2)
+      integer cell(lctrs2)
+      real map_xm1(lx1,lz1,lelt), map_ym1(lx1,lz1,lelt)
+
+      idir = 3
+      nelsort = 0
+      ierr = 0
+
+      return
+      end

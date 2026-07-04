@@ -1,0 +1,32 @@
+[GENERAL]
+#startFrom=be0.f00146
+stopAt = endTime
+endTime = 600
+variableDT = yes
+targetCFL = 0.3
+dt = 1.0e-03
+writeControl = runTime
+writeInterval = 100000000
+dealiasing = yes
+
+# --- 显式滤波设置 ---
+filtering = explicit
+filterWeight = 0.05
+filterModes = 2
+
+[PROBLEMTYPE]
+# !!! 必须加回 heat，否则第一个标量（交通源）会被永远隐藏 !!!
+# 注意：这里只需要定义到 scalar02，因为 heat 占了第一个位置
+#equation = incompNS + heat + scalar01 + scalar02
+equation = incompNS
+
+
+[PRESSURE]
+residualTol = 1e-07
+residualProj = yes
+
+[VELOCITY]
+residualTol = 1e-08
+density = 1.0
+viscosity = -500.0
+residualProj = yes

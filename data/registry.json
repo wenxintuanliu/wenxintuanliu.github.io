@@ -32,11 +32,23 @@
       "content": "content/projects/cylinder-hodmd.md",
       "featured": false,
       "facts": [
-        { "label": "雷诺数", "value": "100" },
-        { "label": "分解范围/s", "value": "120-180" },
-        { "label": "外推范围/s", "value": "180-200" },
-        { "label": "主频率", "value": "0.179" }
-        ]
+        {
+          "label": "雷诺数",
+          "value": "100"
+        },
+        {
+          "label": "分解范围/s",
+          "value": "120-180"
+        },
+        {
+          "label": "外推范围/s",
+          "value": "180-200"
+        },
+        {
+          "label": "主频率",
+          "value": "0.179"
+        }
+      ]
     },
     {
       "id": "lid-obstacle",
@@ -45,11 +57,23 @@
       "content": "content/projects/lid-obstacle.md",
       "featured": false,
       "facts": [
-        { "label": "雷诺数", "value": "1000-5000" },
-        { "label": "障碍物尺寸", "value": "0.2^3" },
-        { "label": "计算时间范围", "value": "1500以上" },
-        { "label": "数模方法", "value": "高保真谱元数值模拟" }
-        ]
+        {
+          "label": "雷诺数",
+          "value": "1000-5000"
+        },
+        {
+          "label": "障碍物尺寸",
+          "value": "0.2^3"
+        },
+        {
+          "label": "计算时间范围",
+          "value": "1500以上"
+        },
+        {
+          "label": "数模方法",
+          "value": "高保真谱元数值模拟"
+        }
+      ]
     },
     {
       "id": "swm",
@@ -82,6 +106,20 @@
           "value": "瞬态 GIF"
         }
       ]
+    },
+    {
+      "id": "ldc",
+      "title": "项目标题",
+      "category": "Project",
+      "content": "content/projects/ldc.md",
+      "featured": false
+    },
+    {
+      "id": "be",
+      "title": "项目标题",
+      "category": "Project",
+      "content": "content/projects/be.md",
+      "featured": false
     }
   ],
   "methodArticles": [

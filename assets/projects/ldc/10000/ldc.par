@@ -1,0 +1,39 @@
+#
+# nek parameter file for 3D Lid-Driven Cavity
+# Compatible with Nek5000 20.0-dev
+#
+[GENERAL]
+startFrom = ins.f00001
+stopAt = endTime
+endTime = 2500
+
+dt = 0.0004
+
+writeControl = runTime
+writeInterval = 1000000000000
+
+dealiasing = yes
+
+[PROBLEMTYPE]
+equation = incompNS
+
+[PRESSURE]
+residualTol = 1e-07
+residualProj = yes
+
+[VELOCITY]
+residualTol = 1e-08
+density = 1.0
+viscosity = -10000
+
+[_RPRM]
+PARFWRITE = no
+PARFNAME = outparfile
+
+[_MNTR]
+LOGLEVEL = 0
+
+[_STAT]
+AVSTEP = 1
+SKSTEP = 0
+IOSTEP = 50000

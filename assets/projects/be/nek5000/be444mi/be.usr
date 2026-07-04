@@ -1,0 +1,221 @@
+C-----------------------------------------------------------------------
+C  Nek5000 User File - case0 (Velocity-only continuation)
+C
+C  目标：只求解速度/压力（equation = incompNS），不求解温度/被动标量。
+C  驱动：固定体力（等效压降），ffx = 0.25。
+C
+C  说明：即便 SIZE 里 ldimt>0，本算例不启用标量方程，userq/userbc
+C        的标量设置也不会进入求解器；为避免误解，这里只保留速度相关逻辑。
+C-----------------------------------------------------------------------
+      subroutine userchk
+      include 'SIZE'
+      include 'TOTAL'
+
+      include 'AVG'
+
+C     Dual-track output (snapshot + statistics)
+C       - Velocity-only run: keep nscalars=0 in outpost2
+      real    t_inst_freq, t_stat_freq
+      real    t_next_inst, t_next_stat
+      real    t_stat_start
+      real    t_inst_switch
+      real    t_inst_freq_lo, t_inst_freq_hi
+      real    t_inst_freq_prev
+      real    dt_inst_freq
+      logical ifpo_save
+      integer itmp
+
+      save    t_next_inst, t_next_stat
+      data    t_next_inst / -1.0 /
+      data    t_next_stat / -1.0 /
+      save    t_inst_freq_prev
+      data    t_inst_freq_prev / -1.0 /
+
+      t_stat_start = 0.0
+      t_stat_freq  = 10
+
+c     Instantaneous output frequency switch at t=500
+c       time <= 550 : dt_out = 1.0
+c       time >  550 : dt_out = 0.01
+      t_inst_switch  = 550.0
+      t_inst_freq_lo = 1.0
+      t_inst_freq_hi = 0.01
+
+      t_inst_freq = t_inst_freq_lo
+      if (time .gt. t_inst_switch) t_inst_freq = t_inst_freq_hi
+
+C     (A) Initialize next output times
+      if (t_next_inst .lt. 0.0) then
+         if (time .lt. 1.0e-9) then
+            t_next_inst = t_inst_freq
+         else
+            itmp = int(time/t_inst_freq) + 1
+            t_next_inst = itmp*t_inst_freq
+         endif
+                  t_inst_freq_prev = t_inst_freq
+         if (nid.eq.0) write(6,*) '[HODMD] Next t=',t_next_inst
+      endif
+
+c     If frequency changed (crossed t_inst_switch), reschedule next output
+            if (t_inst_freq_prev .gt. 0.0) then
+                  dt_inst_freq = t_inst_freq - t_inst_freq_prev
+                  if (abs(dt_inst_freq) .gt. 1.0e-12) then
+                        itmp = int(time/t_inst_freq) + 1
+                        t_next_inst = itmp*t_inst_freq
+                        t_inst_freq_prev = t_inst_freq
+                        if (nid.eq.0) write(6,*) '[HODMD] Freq=',t_inst_freq
+                        if (nid.eq.0) write(6,*) '[HODMD] Next t=',t_next_inst
+                  endif
+            endif
+
+      if (t_next_stat .lt. 0.0) then
+         if (time .lt. t_stat_start) then
+            itmp = int(t_stat_start/t_stat_freq) + 1
+            t_next_stat = itmp*t_stat_freq
+         else
+            itmp = int(time/t_stat_freq) + 1
+            t_next_stat = itmp*t_stat_freq
+         endif
+         if (nid.eq.0) write(6,*) '[STATS] Next t=',t_next_stat
+      endif
+
+C     (B) Accumulate and dump statistics
+      if (time .gt. t_stat_start) then
+         call avg_all
+         if (time .ge. (t_next_stat - 1.0e-9)) then
+            if (nid.eq.0) write(6,*) '[STATS] Dump'
+            call outpost2(uavg,vavg,wavg,pavg,tavg,0,'st1')
+            call outpost2(urms,vrms,wrms,prms,trms,0,'st2')
+            ifpo_save = ifpo
+            ifpo = .false.
+            call outpost2(uvms,vwms,wums,prms,trms,0,'st3')
+            ifpo = ifpo_save
+
+            t_next_stat = t_next_stat + t_stat_freq
+            if (t_next_stat .le. time) then
+               itmp = int(time/t_stat_freq) + 1
+               t_next_stat = itmp*t_stat_freq
+            endif
+         endif
+      endif
+
+C     (C) Instantaneous snapshot
+      if (time .ge. (t_next_inst - 1.0e-9)) then
+         if (nid.eq.0) write(6,*) '[HODMD] Snapshot t=',time
+         call outpost2(vx,vy,vz,pr,t,0,'ins')
+         t_next_inst = t_next_inst + t_inst_freq
+         if (t_next_inst .le. time) then
+            itmp = int(time/t_inst_freq) + 1
+            t_next_inst = itmp*t_inst_freq
+         endif
+      endif
+
+      return
+      end
+
+C-----------------------------------------------------------------------
+      subroutine userq(ix,iy,iz,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+c case0 仅求解 incompNS（无标量方程），这里保持为空实现。
+      qvol = 0.0
+      avol = 0.0
+
+      return
+      end
+C-----------------------------------------------------------------------
+      subroutine userf(ix,iy,iz,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+      ffx = 0.25
+      ffy = 0.0
+      ffz = 0.0
+      return
+      end
+
+C-----------------------------------------------------------------------
+      subroutine useric(ix,iy,iz,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+      integer idum
+      save    idum
+      data    idum / 0 /
+
+c 初始速度微小扰动
+      ux = 2.0 + 0.1 * (ran1(idum) - 0.5)
+      uy = 0.0 + 0.1 * (ran1(idum) - 0.5)
+      uz = 0.0 + 0.1 * (ran1(idum) - 0.5)
+
+                  temp = 0.0
+
+      return
+      end
+
+C-----------------------------------------------------------------------
+      subroutine userbc(ix,iy,iz,iside,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+c 速度边界值 (P和W会自动处理，这里只需给0)
+      ux = 0.0
+      uy = 0.0
+      uz = 0.0
+
+      temp = 0.0
+
+c 通量边界值（标量方程未启用，这里不会被使用）
+      flux = 0.0
+
+      return
+      end
+
+C-----------------------------------------------------------------------
+      subroutine usrdat
+      include 'SIZE'
+      include 'TOTAL'
+      return
+      end
+
+C-----------------------------------------------------------------------
+      subroutine usrdat2
+      include 'SIZE'
+      include 'TOTAL'
+
+      integer iel, ifc
+      real boundary_id
+
+c 循环所有单元的所有面
+      do iel=1,nelv
+         do ifc=1,2*ndim
+
+c 读取 .re2 文件中定义的边界ID
+            boundary_id = bc(5,ifc,iel,1)
+
+            if (boundary_id .ne. 0.0) then
+
+c 速度场 (Field 1)
+c ID=2 (天空): 对称/滑移
+               if (abs(boundary_id-2.0).lt.0.1) cbc(ifc,iel,1)='SYM'
+
+c ID=7 (地面/建筑): 无滑移壁面
+               if (abs(boundary_id-7.0).lt.0.1) cbc(ifc,iel,1)='W  '
+
+            endif
+         enddo
+      enddo
+
+      return
+      end
+
+C-----------------------------------------------------------------------
+      subroutine usrdat3
+      include 'SIZE'
+      include 'TOTAL'
+      return
+      end

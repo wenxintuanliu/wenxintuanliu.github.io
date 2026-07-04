@@ -1,0 +1,44 @@
+C     SIZE file for 3D Street Canyon DNS + Pollutant
+C
+      integer ldim,lx1,lxd,lx2,lx1m,lelg,lelt,lpmin,lpmax,ldimt
+      integer lpelt,lbelt,toteq,lcvelt
+      integer lelx,lely,lelz,mxprev,lgmres,lorder,lhis
+      integer maxobj,lpert,nsessmax,lxo
+      integer lfdm,ldimt_proj,lelr
+
+C     === 1. 基础维度 (DNS 标准) ===
+      parameter (ldim=3)             ! 3D simulation
+      parameter (lx1=9)              ! 多项式阶数 N=8
+      parameter (lxd=14)             
+      parameter (lx2=lx1-2)          ! 压力网格
+
+C     === 2. 网格容量 ===
+      parameter (lelg=500)         ! 全局单元上限 (gmsh2nek: hex=6912)
+      parameter (lelt=24)           ! 单核最大单元数 ( ceil(6912/64)=120)
+      parameter (lpmin=1, lpmax=32) !
+
+C     === 3. 标量与求解器参数 ===
+      parameter (ldimt=1)            ! 支持温度/标量求解 (重要修改!)
+      parameter (ldimt_proj=ldimt)
+      parameter (lelr=lelt)
+      parameter (lhis=100)
+      parameter (maxobj=10)
+      parameter (lpert=1)
+      parameter (nsessmax=1)
+      parameter (lxo=lx1)
+
+      parameter (mxprev=20)
+      parameter (lgmres=30)
+      parameter (lorder=3)
+
+C     === 4. 衍生参数 ===
+      parameter (lx1m=lx1)
+      parameter (lfdm=1)
+
+      parameter (lelx=1,lely=1,lelz=1)
+      parameter (lbelt=lelt)
+      parameter (lpelt=lelt)
+      parameter (lcvelt=lelt)
+
+C     === 这一行必须保留 ===
+      include 'SIZE.inc'

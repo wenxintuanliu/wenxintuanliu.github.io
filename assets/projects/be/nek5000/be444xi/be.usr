@@ -1,0 +1,206 @@
+C-----------------------------------------------------------------------
+      subroutine userchk
+      include 'SIZE'
+      include 'TOTAL'
+
+      include 'AVG'
+
+c     Dual-track output:
+c       - statistics: every 20.0 physical time, windowed (reset)
+c       - snapshots : time in [1050,1100], every 0.01 physical time
+
+      real    t_stat_freq
+      real    t_inst_start, t_inst_end, t_inst_freq, t_next_inst
+      real    dtime, alpha, beta
+      real    time_temp, dtmp, eps
+      integer ntot, nto2, itmp, icalld
+      logical ifpo_save
+
+      save    icalld, t_next_inst
+      data    icalld /0/
+      data    t_next_inst / -1.0 /
+
+      if (istep.eq.0) return
+
+      eps          = 1.0e-9
+      t_stat_freq  = 20.0
+      t_inst_start = 550.0
+      t_inst_end   = 600.0
+      t_inst_freq  = 0.01
+
+      ntot = lx1*ly1*lz1*nelv
+      nto2 = lx2*ly2*lz2*nelv
+
+c     One-time init
+      if (icalld.eq.0) then
+         icalld = 1
+         atime  = 0.
+         timel  = time
+
+         call rzero(uavg,ntot)
+         call rzero(vavg,ntot)
+         call rzero(wavg,ntot)
+         call rzero(pavg,nto2)
+
+         call rzero(urms,ntot)
+         call rzero(vrms,ntot)
+         call rzero(wrms,ntot)
+         call rzero(prms,nto2)
+
+         call rzero(uvms,ntot)
+         call rzero(vwms,ntot)
+         call rzero(wums,ntot)
+      endif
+
+      if (t_next_inst.lt.0.0) then
+         t_next_inst = t_inst_start
+         if (time.gt.t_inst_start) then
+            itmp = int((time-t_inst_start)/t_inst_freq) + 1
+            t_next_inst = t_inst_start + itmp*t_inst_freq
+         endif
+      endif
+
+c     Accumulate windowed statistics (time-weighted)
+      dtime = time - timel
+      if (dtime.gt.0.) then
+         atime = atime + dtime
+         beta  = dtime/atime
+         alpha = 1. - beta
+
+         call avg1(uavg,vx,alpha,beta,ntot,'um  ',.false.)
+         call avg1(vavg,vy,alpha,beta,ntot,'vm  ',.false.)
+         call avg1(wavg,vz,alpha,beta,ntot,'wm  ',.false.)
+         call avg1(pavg,pr,alpha,beta,nto2,'prm ',.false.)
+
+         call avg2(urms,vx,alpha,beta,ntot,'ums ',.false.)
+         call avg2(vrms,vy,alpha,beta,ntot,'vms ',.false.)
+         call avg2(wrms,vz,alpha,beta,ntot,'wms ',.false.)
+         call avg2(prms,pr,alpha,beta,nto2,'prms',.false.)
+
+         call avg3(uvms,vx,vy,alpha,beta,ntot,'uvm ',.false.)
+         call avg3(vwms,vy,vz,alpha,beta,ntot,'vwm ',.false.)
+         call avg3(wums,vz,vx,alpha,beta,ntot,'wum ',.false.)
+      endif
+
+c     Dump statistics every 20.0 physical time, then reset window
+      if (atime.ge.(t_stat_freq-eps) .or. lastep.eq.1) then
+         time_temp = time
+         time      = atime
+         dtmp      = param(63)
+         param(63) = 1
+
+         call outpost2(uavg,vavg,wavg,pavg,t,0,'avg')
+         call outpost2(urms,vrms,wrms,prms,t,0,'rms')
+
+         ifpo_save = ifpo
+         ifpo = .false.
+         call outpost2(uvms,vwms,wums,prms,t,0,'rm2')
+         ifpo = ifpo_save
+
+         param(63) = dtmp
+         time      = time_temp
+
+         call rzero(uavg,ntot)
+         call rzero(vavg,ntot)
+         call rzero(wavg,ntot)
+         call rzero(pavg,nto2)
+
+         call rzero(urms,ntot)
+         call rzero(vrms,ntot)
+         call rzero(wrms,ntot)
+         call rzero(prms,nto2)
+
+         call rzero(uvms,ntot)
+         call rzero(vwms,ntot)
+         call rzero(wums,ntot)
+
+         atime = 0.
+      endif
+
+c     Instantaneous snapshots: only time in [850,900], every 0.01
+      if (time.ge.(t_inst_start-eps) .and.
+     &    time.le.(t_inst_end+eps)) then
+         if (time.ge.(t_next_inst-eps)) then
+            call outpost2(vx,vy,vz,pr,t,0,'ins')
+            t_next_inst = t_next_inst + t_inst_freq
+            if (t_next_inst.le.time+eps) then
+               itmp = int((time-t_inst_start)/t_inst_freq) + 1
+               t_next_inst = t_inst_start + itmp*t_inst_freq
+            endif
+         endif
+      endif
+
+      timel = time
+
+      return
+      end
+C-----------------------------------------------------------------------
+      subroutine userf(ix,iy,iz,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+
+c     === 3. 显式驱动：直接写死数值 ===
+c     彻底放弃 param(55)，直接在这里写 0.25
+c     这是绝对纯净的物理驱动力，系统无法通过 param 读取到它
+      ffx = 0.25 
+      ffy = 0.0
+      ffz = 0.0
+
+      return
+      end
+C-----------------------------------------------------------------------
+      subroutine useric(ix,iy,iz,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+      integer idum
+      save    idum
+      data    idum / 0 /
+
+c     === 初始条件 ===
+      ux = 8.0 + 1.0 * (ran1(idum) - 0.5)
+      uy = 0.0 + 1.0 * (ran1(idum) - 0.5)
+      uz = 0.0 + 1.0 * (ran1(idum) - 0.5)
+
+      return
+      end
+C-----------------------------------------------------------------------
+      subroutine usrdat
+      include 'SIZE'
+      include 'TOTAL'
+      return
+      end
+C-----------------------------------------------------------------------
+      subroutine usrdat2
+      include 'SIZE'
+      include 'TOTAL'
+      integer iel, ifc
+      real boundary_id
+      do iel=1,nelv
+         do ifc=1,2*ndim
+            boundary_id = bc(5,ifc,iel,1)
+            if (boundary_id .ne. 0.0) then
+               if (abs(boundary_id - 2.0) .lt. 0.1) cbc(ifc,iel,1)='SYM'
+               if (abs(boundary_id - 7.0) .lt. 0.1) cbc(ifc,iel,1)='W  '
+            endif
+         enddo
+      enddo
+      return
+      end
+C-----------------------------------------------------------------------
+      subroutine usrdat3
+      include 'SIZE'
+      include 'TOTAL'
+      return
+      end
+C-----------------------------------------------------------------------
+      subroutine userbc(ix,iy,iz,iside,eg)
+      include 'SIZE'
+      include 'TOTAL'
+      include 'NEKUSE'
+      ux=0.0
+      uy=0.0
+      uz=0.0
+      return
+      end

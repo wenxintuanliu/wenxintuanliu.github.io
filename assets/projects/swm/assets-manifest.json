@@ -5,17 +5,17 @@
       "role": "hero",
       "src": "assets/projects/swm/schlieren-evolution.gif",
       "frames": [
-        "schlieren-frame-00000.png",
-        "schlieren-frame-00005.png",
-        "schlieren-frame-00010.png",
-        "schlieren-frame-00015.png",
+        "schlieren-frame-00008.png",
+        "schlieren-frame-00012.png",
+        "schlieren-frame-00016.png",
         "schlieren-frame-00020.png",
-        "schlieren-frame-00025.png",
-        "schlieren-frame-00030.png",
-        "schlieren-frame-00035.png",
+        "schlieren-frame-00024.png",
+        "schlieren-frame-00028.png",
+        "schlieren-frame-00032.png",
+        "schlieren-frame-00036.png",
         "schlieren-frame-00040.png",
-        "schlieren-frame-00045.png",
-        "schlieren-frame-00050.png"
+        "schlieren-frame-00044.png",
+        "schlieren-frame-00048.png"
       ]
     },
     {
@@ -32,6 +32,14 @@
       "role": "vorticity",
       "src": "assets/projects/swm/vorticity-final.png",
       "step": 50
+    },
+    {
+      "role": "probes",
+      "src": "assets/projects/swm/probe-pressure-history.png"
+    },
+    {
+      "role": "material-diagnostics",
+      "src": "assets/projects/swm/material-diagnostics.png"
     }
   ]
 }

@@ -1,15 +1,16 @@
 {
-  "generatedAt": "2026-05-31T16:05:35.246524+00:00",
-  "sourceData": "/home/chunfengfusu/NekRS_run/cyl2/z2_plane/data/cyl_z2_sindy.h5",
-  "aeRun": "/home/chunfengfusu/NekRS_run/cyl2/z2_plane/sindy/GNN_SINDY/outputs/rom_stage1_gcn_ae_z4",
+  "generatedAt": "2026-07-04T07:07:59.697119+00:00",
+  "sourceCase": "/home/chunfengfusu/NekRS_run/cyl",
+  "sourceData": "/home/chunfengfusu/NekRS_run/cyl/z2_plane_gnn/data/cyl_z2_plane_gnn.h5",
+  "aeRun": "/home/chunfengfusu/NekRS_run/cyl/z2_plane_gnn/sindy/GNN_SINDY/GNN/outputs/gnn_autoencoder_oscillator_z2",
   "metadata": {
-    "source_case_dir": "/home/chunfengfusu/NekRS_run/cyl2",
+    "source_case_dir": "/home/chunfengfusu/NekRS_run/cyl",
     "source_prefix": "cyl0",
     "source_first": 0,
     "source_last": null,
-    "source_frame_count": 501,
-    "output_h5": "/home/chunfengfusu/NekRS_run/cyl2/z2_plane/data/cyl_z2_sindy.h5",
-    "static_graph_npz": "/home/chunfengfusu/NekRS_run/cyl2/z2_plane/data/static_graph_z2.npz",
+    "source_frame_count": 401,
+    "output_h5": "/home/chunfengfusu/NekRS_run/cyl/z2_plane_gnn/data/cyl_z2_plane_gnn.h5",
+    "static_graph_npz": "/home/chunfengfusu/NekRS_run/cyl/z2_plane_gnn/data/static_graph_z2.npz",
     "z_value": 2.0,
     "z_tol": 1e-06,
     "weld_tol": 1e-06,
@@ -40,117 +41,147 @@
         2.0
       ]
     },
-    "elapsed_seconds": 23.237
+    "elapsed_seconds": 16.818
+  },
+  "graphAudit": {
+    "fields_shape": [
+      401,
+      23778,
+      2
+    ],
+    "pos_shape": [
+      23778,
+      3
+    ],
+    "edge_index_shape": [
+      2,
+      94356
+    ],
+    "finite_fields": true,
+    "finite_pos": true,
+    "valid_edge_index": true,
+    "self_loops": 0,
+    "isolated_nodes": 0,
+    "in_degree_min_median_max": [
+      2,
+      4.0,
+      5
+    ],
+    "edge_distance_min_p1_median_p99_max": [
+      0.0053086308762431145,
+      0.006952915503643453,
+      0.12666654586791992,
+      0.14375019073486328,
+      0.14375019073486328
+    ],
+    "zero_distance_edges": 0,
+    "time_dt_min_max": [
+      0.19999999999998863,
+      0.20000000010000463
+    ]
   },
   "summary": {
-    "data": "/home/chunfengfusu/NekRS_run/cyl2/z2_plane/data/cyl_z2_sindy.h5",
-    "snapshots": 501,
-    "train_count": 401,
+    "data": "/home/chunfengfusu/NekRS_run/cyl/z2_plane_gnn/data/cyl_z2_plane_gnn.h5",
+    "snapshots": 401,
+    "train_count": 301,
     "validation_count": 100,
-    "nodes": 23778,
-    "components": 2,
-    "dt_median": 0.20000000000000284,
-    "stage": "GCN-AE only",
-    "latent_dim": 8,
-    "model_args": {
-      "data": "/home/chunfengfusu/NekRS_run/cyl2/z2_plane/data/cyl_z2_sindy.h5",
-      "output": "/home/chunfengfusu/NekRS_run/cyl2/z2_plane/sindy/GNN_SINDY/outputs/rom_stage1_gcn_ae_z4",
-      "train_count": 401,
-      "latent_dim": 8,
-      "hidden": 64,
-      "gcn_layers": 2,
-      "decoder_hidden": 256,
-      "decoder_layers": 3,
-      "encoder_pos": "raw",
-      "encoder_fourier_features": 2,
-      "decoder_fourier_features": 4,
-      "edge_weight": "ones",
-      "dropout": 0.0,
-      "epochs": 500,
-      "batch_size": 2,
-      "lr": 0.001,
-      "weight_decay": 1e-06,
-      "node_chunk": 2048,
-      "temporal_window": 16,
-      "temporal_batches": 4,
-      "temporal_recon_weight": 1.0,
-      "latent_accel_weight": 0.0001,
-      "save_reconstructions": true,
-      "seed": 7,
-      "device": "cuda"
-    },
+    "library": "torch_geometric",
+    "architecture": "GCNConv + mean/RMS readout + Fourier coordinate decoder",
+    "latent_dim": 2,
+    "hidden": 64,
+    "layers": 2,
+    "decoder_hidden": 256,
+    "encoder_pos": "raw",
+    "encoder_fourier_features": 2,
+    "encoder_pos_dim": 3,
+    "decoder_pos_dim": 27,
+    "fourier_features": 4,
+    "batch_size": 2,
+    "temporal_window": 32,
+    "temporal_batches": 8,
+    "latent_accel_weight": 0.001,
+    "latent_speed_weight": 0.0005,
+    "latent_structure": "oscillator",
+    "oscillator_weight": 0.002,
+    "dynamics_recon_weight": 1.0,
+    "node_chunk": 1024,
     "train_reconstruction": {
-      "global_rel_l2": 0.0555960014462471,
-      "u_rel_l2": 0.023145223036408424,
-      "v_rel_l2": 0.2580602467060089
+      "global_rel_l2": 0.03053339384496212,
+      "u_rel_l2": 0.02353578619658947,
+      "v_rel_l2": 0.09325474500656128
     },
     "validation_reconstruction": {
-      "global_rel_l2": 0.023063013330101967,
-      "u_rel_l2": 0.007928797975182533,
-      "v_rel_l2": 0.10077323764562607
+      "global_rel_l2": 0.0305364690721035,
+      "u_rel_l2": 0.02359135076403618,
+      "v_rel_l2": 0.09296523779630661
     },
-    "latent_mean_train": [
-      -0.686257541179657,
-      0.03776993602514267,
-      -0.07699178159236908,
-      -0.9969484806060791,
-      -0.8729532957077026,
-      0.43587884306907654,
-      0.34078294038772583,
-      0.6149038672447205
-    ],
-    "latent_std_train": [
-      1.4942400455474854,
-      1.3089755773544312,
-      1.3447058200836182,
-      0.9582659006118774,
-      0.9512449502944946,
-      1.4221922159194946,
-      1.2589075565338135,
-      1.498549222946167
-    ]
+    "latent_phase_metrics": {
+      "dt_median": 0.19999999999998863,
+      "train_step_median": 0.6858487129211426,
+      "validation_step_median": 0.6974499225616455,
+      "split_jump_over_global_median_step": 1.0950275659561157,
+      "train_std_per_latent": [
+        2.2147672176361084,
+        2.108027458190918
+      ],
+      "validation_std_per_latent": [
+        2.2283966541290283,
+        2.1101412773132324
+      ],
+      "first_pair_center_train_mean": [
+        -0.0603218711912632,
+        1.329712986946106
+      ],
+      "radius_cv_train": 0.07795549184083939,
+      "radius_cv_validation": 0.07602299749851227,
+      "signed_omega_mean_train": 1.122887706752833,
+      "omega_std_train": 0.06225281987642106,
+      "omega_cv_train": 0.05543993357665638,
+      "signed_omega_mean_validation": 1.1308860778754057,
+      "omega_std_validation": 0.06414817573077526,
+      "omega_cv_validation": 0.056723817708756626,
+      "period_from_train_omega": 5.595559795867126,
+      "total_turns": 14.322508811950684,
+      "sindy_ready_oscillator": true
+    }
   },
   "items": [
     {
       "type": "animation",
       "role": "hero",
-      "title": "Transient NekRS z = 2 cylinder-wake speed field",
+      "title": "NekRS z = 2 cylinder-wake speed field",
       "src": "assets/projects/cyl4/flow-evolution.gif",
       "timeRange": [
-        0.0,
-        99.99999999995
+        119.9999999999,
+        200.0000000002
       ],
-      "frameCount": 28,
-      "method": "Rendered directly from cyl_z2_sindy.h5 velocity snapshots"
-    },
-    {
-      "type": "image",
-      "role": "gcn-ae-reconstruction",
-      "title": "GCN-AE reconstruction on the z = 2 cylinder-wake plane",
-      "src": "assets/projects/cyl4/gcn-ae-reconstruction-t0450.png",
-      "time": 89.99999999997,
-      "method": "Existing GCN-AE output; no SINDy rollout used"
+      "frameCount": 28
     },
     {
       "type": "image",
       "role": "graph-preview",
       "title": "Static graph built from the NekRS z = 2 plane",
-      "src": "assets/projects/cyl4/gcn-ae-graph-preview.png",
-      "method": "HDF5 graph/edge_index and graph/pos"
+      "src": "assets/projects/cyl4/gcn-ae-graph-preview.png"
     },
     {
       "type": "image",
-      "role": "latent-components",
-      "title": "First four latent coordinates over time",
-      "src": "assets/projects/cyl4/gcn-ae-latent-components.png",
-      "method": "ae_latent.npz z(t)"
+      "role": "training-summary",
+      "title": "GCN-AE training history and final reconstruction error",
+      "src": "assets/projects/cyl4/gcn-ae-training-history.png"
     },
     {
       "type": "image",
-      "role": "training-history",
-      "title": "GCN-AE training history",
-      "src": "assets/projects/cyl4/gcn-ae-training-history.png",
-      "method": "Copied from Stage 1 GCN-AE output"
+      "role": "latent-phase",
+      "title": "Two-dimensional GCN-AE latent phase portrait",
+      "src": "assets/projects/cyl4/gcn-ae-latent-phase.png"
+    },
+    {
+      "type": "image",
+      "role": "gcn-ae-reconstruction",
+      "title": "GCN-AE reconstruction on the z = 2 cylinder-wake plane",
+      "src": "assets/projects/cyl4/gcn-ae-reconstruction-t0400.png",
+      "snapshot": 400,
+      "time": 200.0000000002
     }
   ]
 }

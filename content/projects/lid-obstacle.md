@@ -25,7 +25,7 @@ summary: 顶盖驱动方腔流在 Re = 1000、3200、5000 下进行无障碍物�
 
 ## 对照方式
 
-页面展示 `Re = 1000 / 3200 / 5000` 下无障碍物与含障碍物的平均流线图，并用 `z = 0.1` 切片涡量 GIF 展示含障碍物流动的瞬态结构 [cite:nek5000-theory]。
+这个算例在 `Re = 1000 / 3200 / 5000` 下比较无障碍物方腔和含障碍物方腔的平均流线，并用 `z = 0.1` 切片涡量 GIF 记录含障碍物流动的瞬态结构 [cite:nek5000-theory]。
 
 ![Vorticity evolution on z = 0.1](assets/projects/lid-obstacle/vorticity-z010-spectral512.gif "含障碍物算例在 z = 0.1 平面的瞬态涡量演化，障碍物区域被置空以避免误读。")
 
@@ -41,8 +41,5 @@ summary: 顶盖驱动方腔流在 Re = 1000、3200、5000 下进行无障碍物�
 
 ![Re = 5000, with obstacle](assets/projects/lid-obstacle/mean-streamline-re5000-obstacle.webp "Averaged streamline plot, y = 0.5")
 
-:::note 阅读提示
-平均流线图用于比较长期结构，涡量动画用于观察瞬态剪切层。
-:::
-
+平均流线图用于比较长期结构，涡量动画用于观察瞬态剪切层。障碍物加入后，主涡的位置和近壁剪切层都会发生调整；随着 Reynolds 数升高，这种局部扰动更容易向整个腔体传播。
 
