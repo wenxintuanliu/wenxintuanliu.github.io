@@ -137,8 +137,10 @@ def plot_flow_frame(flow: dict[str, np.ndarray], tri: mtri.Triangulation, index:
     ax = fig.add_axes([0.070, 0.145, 0.790, 0.780])
     cax = fig.add_axes([0.900, 0.235, 0.022, 0.600])
     artist = contour_field(ax, tri, flow["pos"], speed(flow["fields"][index]), cmap="viridis", vmin=0.0, vmax=vmax)
+    ax.tick_params(axis="both", which="major", labelsize=14)
     cbar = fig.colorbar(artist, cax=cax, ticks=np.linspace(0.0, vmax, 5))
     cbar.ax.yaxis.set_major_formatter(mticker.FormatStrFormatter("%.1f"))
+    cbar.ax.tick_params(labelsize=14)
     cbar.set_label("|u|")
     cbar.outline.set_linewidth(0.6)
     ax.text(

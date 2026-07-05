@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-04T07:07:59.697119+00:00",
+  "generatedAt": "2026-07-05T15:57:33.991901+00:00",
   "sourceCase": "/home/chunfengfusu/NekRS_run/cyl",
   "sourceData": "/home/chunfengfusu/NekRS_run/cyl/z2_plane_gnn/data/cyl_z2_plane_gnn.h5",
   "aeRun": "/home/chunfengfusu/NekRS_run/cyl/z2_plane_gnn/sindy/GNN_SINDY/GNN/outputs/gnn_autoencoder_oscillator_z2",
